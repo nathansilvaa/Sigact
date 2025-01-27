@@ -1,15 +1,14 @@
 package com.example.SIGACTI.model.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-
 import java.util.Date;
+
+
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Contrato {
     @Id
     @NotBlank
@@ -62,12 +61,16 @@ public class Contrato {
     @NotNull
     @Min(0) // Valida que o saldo seja maior ou igual a 0
     private Double saldo;
+    @Column(nullable = false, columnDefinition = "float default 0")
+    private float consumido = 0;
+
+    private String situacaoVigencia;
 
     public Contrato(){
 
     }
 
-    public Contrato(String contrato, Processo processo, Date orcamento, int acaoOrcamentaria, int fonteRecurso, String tipoContratacao, String contratado, int numeroAltomatico, String objeto, String statusContrato, String funLegal, String naturezaServico, Date dataContrato, Date vigenciaInicial, Double valorContrato, Double saldo) {
+    public Contrato(String contrato, Processo processo, Date orcamento, int acaoOrcamentaria, int fonteRecurso, String tipoContratacao, String contratado, int numeroAltomatico, String objeto, String statusContrato, String funLegal, String naturezaServico, Date dataContrato, Date vigenciaInicial, Double valorContrato, Double saldo, Float consumido, String situacaoVigencia) {
         this.contrato = contrato;
         this.processo = processo;
         this.orcamento = orcamento;
@@ -84,6 +87,8 @@ public class Contrato {
         this.vigenciaInicial = vigenciaInicial;
         this.valorContrato = valorContrato;
         this.saldo = saldo;
+        this.consumido = consumido;
+        this.situacaoVigencia = situacaoVigencia;
     }
 
     public @NotBlank String getContrato() {
@@ -217,6 +222,22 @@ public class Contrato {
         this.saldo = saldo;
     }
 
+    public double getConsumido() {
+        return consumido;
+    }
+
+    public void setConsumido(Float consumido) {
+        this.consumido = consumido;
+    }
+
+    public String getSituacaoVigencia() {
+        return situacaoVigencia;
+    }
+
+    public void setSituacaoVigencia(String situacaoVigencia) {
+        this.situacaoVigencia = situacaoVigencia;
+    }
+
     @Override
     public String toString() {
         return "Contrato{" +
@@ -236,6 +257,8 @@ public class Contrato {
                 ", vigenciaInicial=" + vigenciaInicial +
                 ", valorContrato=" + valorContrato +
                 ", saldo=" + saldo +
+                ", consumido=" + consumido +
+                ", situacaoVigencia='" + situacaoVigencia + '\'' +
                 '}';
     }
 }

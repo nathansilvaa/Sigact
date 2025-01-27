@@ -1,17 +1,21 @@
 package com.example.SIGACTI.model.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Processo {
     @Id
     @NotBlank
     private String processo;
+
     @NotBlank
     private String UnidadeGestora;
     @NotBlank
@@ -31,7 +35,7 @@ public class Processo {
     }
 
     public Processo(String processo, String unidadeGestora, String situacao, Double valorPrevisto, Date dataAtuacao, String interessados, String assunto, String resumoObjeto) {
-        processo = processo;
+        this.processo = processo;
         UnidadeGestora = unidadeGestora;
         Situacao = situacao;
         ValorPrevisto = valorPrevisto;
@@ -41,36 +45,28 @@ public class Processo {
         ResumoObjeto = resumoObjeto;
     }
 
-    public String getProcesso() {
-        return processo;
+    public @NotBlank String getResumoObjeto() {
+        return ResumoObjeto;
     }
 
-    public void setProcesso(String processo) {
-        processo = processo;
+    public void setResumoObjeto(@NotBlank String resumoObjeto) {
+        ResumoObjeto = resumoObjeto;
     }
 
-    public String getUnidadeGestora() {
-        return UnidadeGestora;
+    public @NotBlank String getAssunto() {
+        return Assunto;
     }
 
-    public void setUnidadeGestora(String unidadeGestora) {
-        UnidadeGestora = unidadeGestora;
+    public void setAssunto(@NotBlank String assunto) {
+        Assunto = assunto;
     }
 
-    public String getSituacao() {
-        return Situacao;
+    public @NotBlank String getInteressados() {
+        return Interessados;
     }
 
-    public void setSituacao(String situacao) {
-        Situacao = situacao;
-    }
-
-    public Double getValorPrevisto() {
-        return ValorPrevisto;
-    }
-
-    public void setValorPrevisto(Double valorPrevisto) {
-        ValorPrevisto = valorPrevisto;
+    public void setInteressados(@NotBlank String interessados) {
+        Interessados = interessados;
     }
 
     public Date getDataAtuacao() {
@@ -81,34 +77,42 @@ public class Processo {
         DataAtuacao = dataAtuacao;
     }
 
-    public String getInteressados() {
-        return Interessados;
+    public @Min(0) Double getValorPrevisto() {
+        return ValorPrevisto;
     }
 
-    public void setInteressados(String interessados) {
-        Interessados = interessados;
+    public void setValorPrevisto(@Min(0) Double valorPrevisto) {
+        ValorPrevisto = valorPrevisto;
     }
 
-    public String getAssunto() {
-        return Assunto;
+    public @NotBlank String getSituacao() {
+        return Situacao;
     }
 
-    public void setAssunto(String assunto) {
-        Assunto = assunto;
+    public void setSituacao(@NotBlank String situacao) {
+        Situacao = situacao;
     }
 
-    public String getResumoObjeto() {
-        return ResumoObjeto;
+    public @NotBlank String getUnidadeGestora() {
+        return UnidadeGestora;
     }
 
-    public void setResumoObjeto(String resumoObjeto) {
-        ResumoObjeto = resumoObjeto;
+    public void setUnidadeGestora(@NotBlank String unidadeGestora) {
+        UnidadeGestora = unidadeGestora;
+    }
+
+    public @NotBlank String getProcesso() {
+        return processo;
+    }
+
+    public void setProcesso(@NotBlank String processo) {
+        this.processo = processo;
     }
 
     @Override
     public String toString() {
         return "Processo{" +
-                "Processo='" + processo + '\'' +
+                "processo='" + processo + '\'' +
                 ", UnidadeGestora='" + UnidadeGestora + '\'' +
                 ", Situacao='" + Situacao + '\'' +
                 ", ValorPrevisto=" + ValorPrevisto +
