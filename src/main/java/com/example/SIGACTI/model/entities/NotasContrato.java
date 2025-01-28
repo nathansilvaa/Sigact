@@ -1,40 +1,85 @@
 package com.example.SIGACTI.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
-import java.util.Date;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
+
 
 
 @Entity
-public class NotasContrato extends Contrato{
-
-    private String cnpj;
+public class NotasContrato{
+    @Id
+    @NotBlank
     private String notaFiscal;
+    @ManyToOne
+    @JoinColumn(name = "contrato", nullable = false)
+    @JsonIgnore
+    private Contrato contrato;
+    private String processo;
+    private String objeto;
+    private String contratado;
+    private String cnpj;
+    private Double valorContra;
     private String atesto;
+    private String fiscalContrato;
     private String gestorContrato;
-    private String fiscalAdministrativo;
-    private String fiscalTecnico;
 
-    public NotasContrato(String cnpj, String notaFiscal, String atesto, String gestorContrato, String fiscalAdministrativo, String fiscalTecnico) {
-        this.cnpj = cnpj;
-        this.notaFiscal = notaFiscal;
-        this.atesto = atesto;
+    public NotasContrato(String gestorContrato, String fiscalContrato, String atesto, Double valorContra, String cnpj, String contratado, String objeto, String processo, Contrato contrato, String notaFiscal) {
         this.gestorContrato = gestorContrato;
-        this.fiscalAdministrativo = fiscalAdministrativo;
-        this.fiscalTecnico = fiscalTecnico;
-    }
-
-    public NotasContrato(String contrato, Processo processo, Date orcamento, int acaoOrcamentaria, int fonteRecurso, String tipoContratacao, String contratado, int numeroAltomatico, String objeto, String statusContrato, String funLegal, String naturezaServico, Date dataContrato, Date vigenciaInicial, Double valorContrato, Double saldo, Float consumido, String situacaoVigencia, String cnpj, String notaFiscal, String atesto, String gestorContrato, String fiscalAdministrativo, String fiscalTecnico) {
-        super(contrato, processo, orcamento, acaoOrcamentaria, fonteRecurso, tipoContratacao, contratado, numeroAltomatico, objeto, statusContrato, funLegal, naturezaServico, dataContrato, vigenciaInicial, valorContrato, saldo, consumido, situacaoVigencia);
-        this.cnpj = cnpj;
-        this.notaFiscal = notaFiscal;
+        this.fiscalContrato = fiscalContrato;
         this.atesto = atesto;
-        this.gestorContrato = gestorContrato;
-        this.fiscalAdministrativo = fiscalAdministrativo;
-        this.fiscalTecnico = fiscalTecnico;
+        this.valorContra = valorContra;
+        this.cnpj = cnpj;
+        this.contratado = contratado;
+        this.objeto = objeto;
+        this.processo = processo;
+        this.contrato = contrato;
+        this.notaFiscal = notaFiscal;
     }
-
     public NotasContrato(){
 
+    }
+    public @NotBlank String getNotaFiscal() {
+        return notaFiscal;
+    }
+
+    public void setNotaFiscal(@NotBlank String notaFiscal) {
+        this.notaFiscal = notaFiscal;
+    }
+
+    public Contrato getContrato() {
+        return contrato;
+    }
+
+    public void setContrato(Contrato contrato) {
+        this.contrato = contrato;
+    }
+
+    public String getProcesso() {
+        return processo;
+    }
+
+    public void setProcesso(String processo) {
+        this.processo = processo;
+    }
+
+    public String getObjeto() {
+        return objeto;
+    }
+
+    public void setObjeto(String objeto) {
+        this.objeto = objeto;
+    }
+
+    public String getContratado() {
+        return contratado;
+    }
+
+    public void setContratado(String contratado) {
+        this.contratado = contratado;
     }
 
     public String getCnpj() {
@@ -45,12 +90,12 @@ public class NotasContrato extends Contrato{
         this.cnpj = cnpj;
     }
 
-    public String getNotaFiscal() {
-        return notaFiscal;
+    public Double getValorContra() {
+        return valorContra;
     }
 
-    public void setNotaFiscal(String notaFiscal) {
-        this.notaFiscal = notaFiscal;
+    public void setValorContra(Double valorContra) {
+        this.valorContra = valorContra;
     }
 
     public String getAtesto() {
@@ -61,6 +106,14 @@ public class NotasContrato extends Contrato{
         this.atesto = atesto;
     }
 
+    public String getFiscalContrato() {
+        return fiscalContrato;
+    }
+
+    public void setFiscalContrato(String fiscalContrato) {
+        this.fiscalContrato = fiscalContrato;
+    }
+
     public String getGestorContrato() {
         return gestorContrato;
     }
@@ -69,31 +122,19 @@ public class NotasContrato extends Contrato{
         this.gestorContrato = gestorContrato;
     }
 
-    public String getFiscalAdministrativo() {
-        return fiscalAdministrativo;
-    }
-
-    public void setFiscalAdministrativo(String fiscalAdministrativo) {
-        this.fiscalAdministrativo = fiscalAdministrativo;
-    }
-
-    public String getFiscalTecnico() {
-        return fiscalTecnico;
-    }
-
-    public void setFiscalTecnico(String fiscalTecnico) {
-        this.fiscalTecnico = fiscalTecnico;
-    }
-
     @Override
     public String toString() {
         return "NotasContrato{" +
-                "cnpj='" + cnpj + '\'' +
-                ", notaFiscal='" + notaFiscal + '\'' +
+                "notaFiscal='" + notaFiscal + '\'' +
+                ", contrato=" + contrato +
+                ", processo='" + processo + '\'' +
+                ", objeto='" + objeto + '\'' +
+                ", contratado='" + contratado + '\'' +
+                ", cnpj='" + cnpj + '\'' +
+                ", valorContra=" + valorContra +
                 ", atesto='" + atesto + '\'' +
+                ", fiscalContrato='" + fiscalContrato + '\'' +
                 ", gestorContrato='" + gestorContrato + '\'' +
-                ", fiscalAdministrativo='" + fiscalAdministrativo + '\'' +
-                ", fiscalTecnico='" + fiscalTecnico + '\'' +
                 '}';
     }
 }

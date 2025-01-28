@@ -18,7 +18,7 @@ public class ContratoController {
     private ProcessoRepository processoRepository;
 
     @RequestMapping(method = {RequestMethod.PUT, RequestMethod.POST})
-    public @ResponseBody Contrato novoContrato(@Valid Contrato contrato){
+    public @ResponseBody Contrato novoContrato(@RequestBody @Valid Contrato contrato){
         contratoRepository.save(contrato);
         return contrato;
     }

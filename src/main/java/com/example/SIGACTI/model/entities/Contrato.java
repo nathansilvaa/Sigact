@@ -4,7 +4,10 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -13,6 +16,9 @@ public class Contrato {
     @Id
     @NotBlank
     private String contrato;
+
+    @OneToMany(mappedBy = "contrato", cascade = CascadeType.ALL)
+    private List<NotasContrato> notasContrato = new ArrayList<>();
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "processo", nullable = false)
@@ -70,8 +76,9 @@ public class Contrato {
 
     }
 
-    public Contrato(String contrato, Processo processo, Date orcamento, int acaoOrcamentaria, int fonteRecurso, String tipoContratacao, String contratado, int numeroAltomatico, String objeto, String statusContrato, String funLegal, String naturezaServico, Date dataContrato, Date vigenciaInicial, Double valorContrato, Double saldo, Float consumido, String situacaoVigencia) {
+    public Contrato(String contrato, List<NotasContrato> notasContrato, Processo processo, Date orcamento, int acaoOrcamentaria, int fonteRecurso, String tipoContratacao, String contratado, int numeroAltomatico, String objeto, String statusContrato, String funLegal, String naturezaServico, Date dataContrato, Date vigenciaInicial, Double valorContrato, Double saldo, float consumido, String situacaoVigencia) {
         this.contrato = contrato;
+        this.notasContrato = notasContrato;
         this.processo = processo;
         this.orcamento = orcamento;
         this.acaoOrcamentaria = acaoOrcamentaria;
@@ -260,5 +267,17 @@ public class Contrato {
                 ", consumido=" + consumido +
                 ", situacaoVigencia='" + situacaoVigencia + '\'' +
                 '}';
+    }
+
+    public List<NotasContrato> getNotasContrato() {
+        return notasContrato;
+    }
+
+    public void setNotasContrato(List<NotasContrato> notasContrato) {
+        this.notasContrato = notasContrato;
+    }
+
+    public void setConsumido(float consumido) {
+        this.consumido = consumido;
     }
 }

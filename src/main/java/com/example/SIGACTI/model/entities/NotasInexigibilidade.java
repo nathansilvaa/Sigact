@@ -2,72 +2,129 @@ package com.example.SIGACTI.model.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.PersistenceUnit;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.Date;
 @Entity
-public class NotasInexigibilidade extends Inexigibilidade{
-    private String cnpj;
+public class NotasInexigibilidade{
+    @Id
+    @NotBlank
     private String notaFiscal;
+
+    @ManyToOne
+    @JoinColumn(name = "inexigibilidade_id", nullable = false)
+    private Inexigibilidade inexigibilidade;
+    private String sgd;
+    private String processo;
+    private String unidade;
+    private String objeto;
+    private String contratado;
+    private Double cnpj;
+    private Double valorTotal;
+    private Date emissao;
     private String atesto;
-    private String gestorContrato;
-    private String fiscalAdministrativo;
-    private String fiscalTecnico;
+    private String responsavelRecebimento;
 
-    public NotasInexigibilidade(String portaria, String resumoObjeto, String sgd, String cnpj, String notaFiscal, String atesto, String gestorContrato, String fiscalAdministrativo, String fiscalTecnico) {
-        super(portaria, resumoObjeto, sgd);
-        this.cnpj = cnpj;
-        this.notaFiscal = notaFiscal;
-        this.atesto = atesto;
-        this.gestorContrato = gestorContrato;
-        this.fiscalAdministrativo = fiscalAdministrativo;
-        this.fiscalTecnico = fiscalTecnico;
-    }
 
-    public NotasInexigibilidade(String contrato, Processo processo, Date orcamento, int acaoOrcamentaria, int fonteRecurso, String tipoContratacao, String contratado, int numeroAltomatico, String objeto, String statusContrato, String funLegal, String naturezaServico, Date dataContrato, Date vigenciaInicial, Double valorContrato, Double saldo, Float consumido, String situacaoVigencia, String portaria, String resumoObjeto, String sgd, String cnpj, String notaFiscal, String atesto, String gestorContrato, String fiscalAdministrativo, String fiscalTecnico) {
-        super(contrato, processo, orcamento, acaoOrcamentaria, fonteRecurso, tipoContratacao, contratado, numeroAltomatico, objeto, statusContrato, funLegal, naturezaServico, dataContrato, vigenciaInicial, valorContrato, saldo, consumido, situacaoVigencia, portaria, resumoObjeto, sgd);
-        this.cnpj = cnpj;
+    public NotasInexigibilidade(String notaFiscal, Inexigibilidade inexigibilidade, String sgd, String processo, String unidade, String objeto, String contratado, Double cnpj, Double valorTotal, Date emissao, String atesto, String responsavelRecebimento) {
         this.notaFiscal = notaFiscal;
+        this.inexigibilidade = inexigibilidade;
+        this.sgd = sgd;
+        this.processo = processo;
+        this.unidade = unidade;
+        this.objeto = objeto;
+        this.contratado = contratado;
+        this.cnpj = cnpj;
+        this.valorTotal = valorTotal;
+        this.emissao = emissao;
         this.atesto = atesto;
-        this.gestorContrato = gestorContrato;
-        this.fiscalAdministrativo = fiscalAdministrativo;
-        this.fiscalTecnico = fiscalTecnico;
+        this.responsavelRecebimento = responsavelRecebimento;
     }
 
     public NotasInexigibilidade(){
 
     }
-    public NotasInexigibilidade(String cnpj, String notaFiscal, String atesto, String gestorContrato, String fiscalAdministrativo, String fiscalTecnico) {
-        this.cnpj = cnpj;
+
+    public @NotBlank String getNotaFiscal() {
+        return notaFiscal;
+    }
+
+    public void setNotaFiscal(@NotBlank String notaFiscal) {
         this.notaFiscal = notaFiscal;
-        this.atesto = atesto;
-        this.gestorContrato = gestorContrato;
-        this.fiscalAdministrativo = fiscalAdministrativo;
-        this.fiscalTecnico = fiscalTecnico;
     }
 
-    public String getFiscalTecnico() {
-        return fiscalTecnico;
+    public Inexigibilidade getInexigibilidade() {
+        return inexigibilidade;
     }
 
-    public void setFiscalTecnico(String fiscalTecnico) {
-        this.fiscalTecnico = fiscalTecnico;
+    public void setInexigibilidade(Inexigibilidade inexigibilidade) {
+        this.inexigibilidade = inexigibilidade;
     }
 
-    public String getFiscalAdministrativo() {
-        return fiscalAdministrativo;
+    public String getSgd() {
+        return sgd;
     }
 
-    public void setFiscalAdministrativo(String fiscalAdministrativo) {
-        this.fiscalAdministrativo = fiscalAdministrativo;
+    public void setSgd(String sgd) {
+        this.sgd = sgd;
     }
 
-    public String getGestorContrato() {
-        return gestorContrato;
+    public String getProcesso() {
+        return processo;
     }
 
-    public void setGestorContrato(String gestorContrato) {
-        this.gestorContrato = gestorContrato;
+    public void setProcesso(String processo) {
+        this.processo = processo;
+    }
+
+    public String getUnidade() {
+        return unidade;
+    }
+
+    public void setUnidade(String unidade) {
+        this.unidade = unidade;
+    }
+
+    public String getObjeto() {
+        return objeto;
+    }
+
+    public void setObjeto(String objeto) {
+        this.objeto = objeto;
+    }
+
+    public String getContratado() {
+        return contratado;
+    }
+
+    public void setContratado(String contratado) {
+        this.contratado = contratado;
+    }
+
+    public Double getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(Double cnpj) {
+        this.cnpj = cnpj;
+    }
+
+    public Double getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(Double valorTotal) {
+        this.valorTotal = valorTotal;
+    }
+
+    public Date getEmissao() {
+        return emissao;
+    }
+
+    public void setEmissao(Date emissao) {
+        this.emissao = emissao;
     }
 
     public String getAtesto() {
@@ -78,31 +135,29 @@ public class NotasInexigibilidade extends Inexigibilidade{
         this.atesto = atesto;
     }
 
-    public String getNotaFiscal() {
-        return notaFiscal;
+    public String getResponsavelRecebimento() {
+        return responsavelRecebimento;
     }
 
-    public void setNotaFiscal(String notaFiscal) {
-        this.notaFiscal = notaFiscal;
-    }
-
-    public String getCnpj() {
-        return cnpj;
-    }
-
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
+    public void setResponsavelRecebimento(String responsavelRecebimento) {
+        this.responsavelRecebimento = responsavelRecebimento;
     }
 
     @Override
     public String toString() {
         return "NotasInexigibilidade{" +
-                "cnpj='" + cnpj + '\'' +
-                ", notaFiscal='" + notaFiscal + '\'' +
+                "notaFiscal='" + notaFiscal + '\'' +
+                ", inexigibilidade=" + inexigibilidade +
+                ", sgd='" + sgd + '\'' +
+                ", processo='" + processo + '\'' +
+                ", unidade='" + unidade + '\'' +
+                ", objeto='" + objeto + '\'' +
+                ", contratado='" + contratado + '\'' +
+                ", cnpj=" + cnpj +
+                ", valorTotal=" + valorTotal +
+                ", emissao=" + emissao +
                 ", atesto='" + atesto + '\'' +
-                ", gestorContrato='" + gestorContrato + '\'' +
-                ", fiscalAdministrativo='" + fiscalAdministrativo + '\'' +
-                ", fiscalTecnico='" + fiscalTecnico + '\'' +
+                ", responsavelRecebimento='" + responsavelRecebimento + '\'' +
                 '}';
     }
 }

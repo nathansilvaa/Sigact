@@ -17,7 +17,7 @@ public class InexigibilidadeController {
 
 
     @RequestMapping(method = {RequestMethod.PUT, RequestMethod.POST})
-    public @ResponseBody Inexigibilidade novaInexigibilidade(@Valid Inexigibilidade inexigibilidade){
+    public @ResponseBody Inexigibilidade novaInexigibilidade(@RequestBody @Valid Inexigibilidade inexigibilidade){
         inexigibilidadeRepository.save(inexigibilidade);
         return inexigibilidade;
     }
