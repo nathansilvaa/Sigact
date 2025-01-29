@@ -15,8 +15,8 @@ public class ProcessoController {
     @Autowired
     private ProcessoRepository processoRepository;
 
-    @RequestMapping(method = {RequestMethod.PUT, RequestMethod.POST})
-    public @ResponseBody Processo novoProcesso(@Valid Processo processo){
+    @PostMapping
+    public @ResponseBody Processo novoProcesso(@RequestBody @Valid Processo processo){
         processoRepository.save(processo);
         return processo;
     }

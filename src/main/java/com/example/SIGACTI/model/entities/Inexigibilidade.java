@@ -1,16 +1,32 @@
 package com.example.SIGACTI.model.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Inexigibilidade extends Contrato{
+public class Inexigibilidade{
+    @NotBlank
+    @Id
     private String portaria;
+    private String processo;
     private String resumoObjeto;
+    private String interessado;
     private String sgd;
+    private String objeto;
+    private String statusContrato;
+    private String funLegal;
+    private String naturezaServiço;
+    private Date dataContrato;
+    private Integer prazoContrato;
+    private Date vigencia;
+    private Double valorContrato;
+    private Double saldo;
+    private String situacaoVigencia;
+    private double consumido;
 
     @OneToMany(mappedBy = "inexigibilidade", cascade = CascadeType.ALL)
     private List<NotasInexigibilidade> notasInexigibilidade = new ArrayList<>();
@@ -20,27 +36,40 @@ public class Inexigibilidade extends Contrato{
 
     }
 
-    public Inexigibilidade(String portaria, String resumoObjeto, String sgd, List<NotasInexigibilidade> notasInexigibilidade) {
+    public Inexigibilidade(String portaria, String processo, String resumoObjeto, String interessado, String sgd, String objeto, String statusContrato, String funLegal, String naturezaServiço, Date dataContrato, Integer prazoContrato, Date vigencia, Double valorContrato, Double saldo, String situacaoVigencia, double consumido, List<NotasInexigibilidade> notasInexigibilidade) {
         this.portaria = portaria;
+        this.processo = processo;
         this.resumoObjeto = resumoObjeto;
+        this.interessado = interessado;
         this.sgd = sgd;
+        this.objeto = objeto;
+        this.statusContrato = statusContrato;
+        this.funLegal = funLegal;
+        this.naturezaServiço = naturezaServiço;
+        this.dataContrato = dataContrato;
+        this.prazoContrato = prazoContrato;
+        this.vigencia = vigencia;
+        this.valorContrato = valorContrato;
+        this.saldo = saldo;
+        this.situacaoVigencia = situacaoVigencia;
+        this.consumido = consumido;
         this.notasInexigibilidade = notasInexigibilidade;
     }
 
-    public Inexigibilidade(String contrato, List<NotasContrato> notasContrato, Processo processo, Date orcamento, int acaoOrcamentaria, int fonteRecurso, String tipoContratacao, String contratado, int numeroAltomatico, String objeto, String statusContrato, String funLegal, String naturezaServico, Date dataContrato, Date vigenciaInicial, Double valorContrato, Double saldo, float consumido, String situacaoVigencia, String portaria, String resumoObjeto, String sgd, List<NotasInexigibilidade> notasInexigibilidade) {
-        super(contrato, notasContrato, processo, orcamento, acaoOrcamentaria, fonteRecurso, tipoContratacao, contratado, numeroAltomatico, objeto, statusContrato, funLegal, naturezaServico, dataContrato, vigenciaInicial, valorContrato, saldo, consumido, situacaoVigencia);
-        this.portaria = portaria;
-        this.resumoObjeto = resumoObjeto;
-        this.sgd = sgd;
-        this.notasInexigibilidade = notasInexigibilidade;
-    }
-
-    public String getPortaria() {
+    public @NotBlank String getPortaria() {
         return portaria;
     }
 
-    public void setPortaria(String portaria) {
+    public void setPortaria(@NotBlank String portaria) {
         this.portaria = portaria;
+    }
+
+    public String getProcesso() {
+        return processo;
+    }
+
+    public void setProcesso(String processo) {
+        this.processo = processo;
     }
 
     public String getResumoObjeto() {
@@ -51,12 +80,108 @@ public class Inexigibilidade extends Contrato{
         this.resumoObjeto = resumoObjeto;
     }
 
+    public String getInteressado() {
+        return interessado;
+    }
+
+    public void setInteressado(String interessado) {
+        this.interessado = interessado;
+    }
+
     public String getSgd() {
         return sgd;
     }
 
     public void setSgd(String sgd) {
         this.sgd = sgd;
+    }
+
+    public String getObjeto() {
+        return objeto;
+    }
+
+    public void setObjeto(String objeto) {
+        this.objeto = objeto;
+    }
+
+    public String getStatusContrato() {
+        return statusContrato;
+    }
+
+    public void setStatusContrato(String statusContrato) {
+        this.statusContrato = statusContrato;
+    }
+
+    public String getFunLegal() {
+        return funLegal;
+    }
+
+    public void setFunLegal(String funLegal) {
+        this.funLegal = funLegal;
+    }
+
+    public String getNaturezaServiço() {
+        return naturezaServiço;
+    }
+
+    public void setNaturezaServiço(String naturezaServiço) {
+        this.naturezaServiço = naturezaServiço;
+    }
+
+    public Date getDataContrato() {
+        return dataContrato;
+    }
+
+    public void setDataContrato(Date dataContrato) {
+        this.dataContrato = dataContrato;
+    }
+
+    public Integer getPrazoContrato() {
+        return prazoContrato;
+    }
+
+    public void setPrazoContrato(Integer prazoContrato) {
+        this.prazoContrato = prazoContrato;
+    }
+
+    public Date getVigencia() {
+        return vigencia;
+    }
+
+    public void setVigencia(Date vigencia) {
+        this.vigencia = vigencia;
+    }
+
+    public Double getValorContrato() {
+        return valorContrato;
+    }
+
+    public void setValorContrato(Double valorContrato) {
+        this.valorContrato = valorContrato;
+    }
+
+    public Double getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(Double saldo) {
+        this.saldo = saldo;
+    }
+
+    public String getSituacaoVigencia() {
+        return situacaoVigencia;
+    }
+
+    public void setSituacaoVigencia(String situacaoVigencia) {
+        this.situacaoVigencia = situacaoVigencia;
+    }
+
+    public double getConsumido() {
+        return consumido;
+    }
+
+    public void setConsumido(double consumido) {
+        this.consumido = consumido;
     }
 
     public List<NotasInexigibilidade> getNotasInexigibilidade() {
@@ -71,8 +196,21 @@ public class Inexigibilidade extends Contrato{
     public String toString() {
         return "Inexigibilidade{" +
                 "portaria='" + portaria + '\'' +
+                ", processo='" + processo + '\'' +
                 ", resumoObjeto='" + resumoObjeto + '\'' +
+                ", interessado='" + interessado + '\'' +
                 ", sgd='" + sgd + '\'' +
+                ", objeto='" + objeto + '\'' +
+                ", statusContrato='" + statusContrato + '\'' +
+                ", funLegal='" + funLegal + '\'' +
+                ", naturezaServiço='" + naturezaServiço + '\'' +
+                ", dataContrato=" + dataContrato +
+                ", prazoContrato=" + prazoContrato +
+                ", vigencia=" + vigencia +
+                ", valorContrato=" + valorContrato +
+                ", saldo=" + saldo +
+                ", situacaoVigencia='" + situacaoVigencia + '\'' +
+                ", consumido=" + consumido +
                 ", notasInexigibilidade=" + notasInexigibilidade +
                 '}';
     }

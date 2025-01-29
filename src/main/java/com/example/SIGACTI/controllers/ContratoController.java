@@ -5,6 +5,7 @@ import com.example.SIGACTI.model.repositories.ContratoRepository;
 import com.example.SIGACTI.model.repositories.ProcessoRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -23,10 +24,10 @@ public class ContratoController {
         return contrato;
     }
 
-    @GetMapping(path = "/todos")
-    public Iterable<Contrato> obterContrato(){
-        return contratoRepository.findAll();
-    };
+//    @GetMapping(path = "/todos")
+//    public Iterable<Contrato> obterContrato(){
+//        return contratoRepository.findAll();
+//    };
     //http://localhost:8080/api/processo?parteProcesso=2021
     @GetMapping(params = "parteContrato")
     public Iterable<Contrato> ObterContratoPorParteNome(@RequestParam String parteContrato){
@@ -35,8 +36,13 @@ public class ContratoController {
 
     //buscar contrato
     @GetMapping
-    public Optional<Contrato> obterContrato(@RequestParam String contrato){
-        return contratoRepository.findById(contrato);
+    public ResponseEntity<?> obterContrato(@RequestParam(required = false) String contrato) {
+        if(contrato == null) {
+            return ResponseEntity.ok(contratoRepository.findAll());
+        }
+        Optional<Contrato> contrato2 = contratoRepository.findById(contrato);
+        return contrato2.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping(params = "contrato")

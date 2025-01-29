@@ -1,5 +1,6 @@
 package com.example.SIGACTI.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -12,23 +13,23 @@ public class NotasInexigibilidade{
     @Id
     @NotBlank
     private String notaFiscal;
-
     @ManyToOne
-    @JoinColumn(name = "inexigibilidade_id", nullable = false)
+    @JoinColumn(name = "portaria", nullable = false)
+    @JsonIgnore
     private Inexigibilidade inexigibilidade;
     private String sgd;
     private String processo;
     private String unidade;
     private String objeto;
     private String contratado;
-    private Double cnpj;
+    private String cnpj;
     private Double valorTotal;
     private Date emissao;
     private String atesto;
     private String responsavelRecebimento;
 
 
-    public NotasInexigibilidade(String notaFiscal, Inexigibilidade inexigibilidade, String sgd, String processo, String unidade, String objeto, String contratado, Double cnpj, Double valorTotal, Date emissao, String atesto, String responsavelRecebimento) {
+    public NotasInexigibilidade(String notaFiscal, Inexigibilidade inexigibilidade, String sgd, String processo, String unidade, String objeto, String contratado, String cnpj, Double valorTotal, Date emissao, String atesto, String responsavelRecebimento) {
         this.notaFiscal = notaFiscal;
         this.inexigibilidade = inexigibilidade;
         this.sgd = sgd;
@@ -43,7 +44,7 @@ public class NotasInexigibilidade{
         this.responsavelRecebimento = responsavelRecebimento;
     }
 
-    public NotasInexigibilidade(){
+    public NotasInexigibilidade() {
 
     }
 
@@ -103,11 +104,11 @@ public class NotasInexigibilidade{
         this.contratado = contratado;
     }
 
-    public Double getCnpj() {
+    public String getCnpj() {
         return cnpj;
     }
 
-    public void setCnpj(Double cnpj) {
+    public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
 
@@ -153,7 +154,7 @@ public class NotasInexigibilidade{
                 ", unidade='" + unidade + '\'' +
                 ", objeto='" + objeto + '\'' +
                 ", contratado='" + contratado + '\'' +
-                ", cnpj=" + cnpj +
+                ", cnpj='" + cnpj + '\'' +
                 ", valorTotal=" + valorTotal +
                 ", emissao=" + emissao +
                 ", atesto='" + atesto + '\'' +

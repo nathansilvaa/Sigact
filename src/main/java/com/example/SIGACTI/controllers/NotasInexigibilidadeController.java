@@ -20,7 +20,7 @@ public class NotasInexigibilidadeController {
 
 
     @RequestMapping(method = {RequestMethod.PUT, RequestMethod.POST})
-    public @ResponseBody NotasInexigibilidade novaNotaInexigibilidade(@Valid NotasInexigibilidade notasInexigibilidade){
+    public @ResponseBody NotasInexigibilidade novaNotaInexigibilidade(@RequestBody @Valid NotasInexigibilidade notasInexigibilidade){
         notasInexigibilidadeRepository.save(notasInexigibilidade);
         return notasInexigibilidade;
     }

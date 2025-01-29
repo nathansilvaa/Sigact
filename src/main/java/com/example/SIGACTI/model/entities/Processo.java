@@ -13,22 +13,15 @@ import java.util.List;
 @Entity
 public class Processo {
     @Id
-    @NotBlank
     private String processo;
-
-    @NotBlank
-    private String UnidadeGestora;
-    @NotBlank
-    private String Situacao;
+    private String unidadeGestora;
+    private String situacao;
     @Min(0)
-    private Double ValorPrevisto;
-    private Date DataAtuacao;
-    @NotBlank
-    private String Interessados;
-    @NotBlank
-    private String Assunto;
-    @NotBlank
-    private String ResumoObjeto;
+    private Double valorPrevisto;
+    private Date dataAtuacao;
+    private String interessados;
+    private String assunto;
+    private String resumoObjeto;
 
     public Processo(){
 
@@ -36,69 +29,13 @@ public class Processo {
 
     public Processo(String processo, String unidadeGestora, String situacao, Double valorPrevisto, Date dataAtuacao, String interessados, String assunto, String resumoObjeto) {
         this.processo = processo;
-        UnidadeGestora = unidadeGestora;
-        Situacao = situacao;
-        ValorPrevisto = valorPrevisto;
-        DataAtuacao = dataAtuacao;
-        Interessados = interessados;
-        Assunto = assunto;
-        ResumoObjeto = resumoObjeto;
-    }
-
-    public @NotBlank String getResumoObjeto() {
-        return ResumoObjeto;
-    }
-
-    public void setResumoObjeto(@NotBlank String resumoObjeto) {
-        ResumoObjeto = resumoObjeto;
-    }
-
-    public @NotBlank String getAssunto() {
-        return Assunto;
-    }
-
-    public void setAssunto(@NotBlank String assunto) {
-        Assunto = assunto;
-    }
-
-    public @NotBlank String getInteressados() {
-        return Interessados;
-    }
-
-    public void setInteressados(@NotBlank String interessados) {
-        Interessados = interessados;
-    }
-
-    public Date getDataAtuacao() {
-        return DataAtuacao;
-    }
-
-    public void setDataAtuacao(Date dataAtuacao) {
-        DataAtuacao = dataAtuacao;
-    }
-
-    public @Min(0) Double getValorPrevisto() {
-        return ValorPrevisto;
-    }
-
-    public void setValorPrevisto(@Min(0) Double valorPrevisto) {
-        ValorPrevisto = valorPrevisto;
-    }
-
-    public @NotBlank String getSituacao() {
-        return Situacao;
-    }
-
-    public void setSituacao(@NotBlank String situacao) {
-        Situacao = situacao;
-    }
-
-    public @NotBlank String getUnidadeGestora() {
-        return UnidadeGestora;
-    }
-
-    public void setUnidadeGestora(@NotBlank String unidadeGestora) {
-        UnidadeGestora = unidadeGestora;
+        this.unidadeGestora = unidadeGestora;
+        this.situacao = situacao;
+        this.valorPrevisto = valorPrevisto;
+        this.dataAtuacao = dataAtuacao;
+        this.interessados = interessados;
+        this.assunto = assunto;
+        this.resumoObjeto = resumoObjeto;
     }
 
     public @NotBlank String getProcesso() {
@@ -109,17 +46,73 @@ public class Processo {
         this.processo = processo;
     }
 
+    public String getUnidadeGestora() {
+        return unidadeGestora;
+    }
+
+    public void setUnidadeGestora(String unidadeGestora) {
+        this.unidadeGestora = unidadeGestora;
+    }
+
+    public String getSituacao() {
+        return situacao;
+    }
+
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
+    }
+
+    public @Min(0) Double getValorPrevisto() {
+        return valorPrevisto;
+    }
+
+    public void setValorPrevisto(@Min(0) Double valorPrevisto) {
+        this.valorPrevisto = valorPrevisto;
+    }
+
+    public Date getDataAtuacao() {
+        return dataAtuacao;
+    }
+
+    public void setDataAtuacao(Date dataAtuacao) {
+        this.dataAtuacao = dataAtuacao;
+    }
+
+    public String getInteressados() {
+        return interessados;
+    }
+
+    public void setInteressados(String interessados) {
+        this.interessados = interessados;
+    }
+
+    public String getAssunto() {
+        return assunto;
+    }
+
+    public void setAssunto(String assunto) {
+        this.assunto = assunto;
+    }
+
+    public String getResumoObjeto() {
+        return resumoObjeto;
+    }
+
+    public void setResumoObjeto(String resumoObjeto) {
+        this.resumoObjeto = resumoObjeto;
+    }
+
     @Override
     public String toString() {
         return "Processo{" +
                 "processo='" + processo + '\'' +
-                ", UnidadeGestora='" + UnidadeGestora + '\'' +
-                ", Situacao='" + Situacao + '\'' +
-                ", ValorPrevisto=" + ValorPrevisto +
-                ", DataAtuacao=" + DataAtuacao +
-                ", Interessados='" + Interessados + '\'' +
-                ", Assunto='" + Assunto + '\'' +
-                ", ResumoObjeto='" + ResumoObjeto + '\'' +
+                ", unidadeGestora='" + unidadeGestora + '\'' +
+                ", situacao='" + situacao + '\'' +
+                ", valorPrevisto=" + valorPrevisto +
+                ", dataAtuacao=" + dataAtuacao +
+                ", interessados='" + interessados + '\'' +
+                ", assunto='" + assunto + '\'' +
+                ", resumoObjeto='" + resumoObjeto + '\'' +
                 '}';
     }
 }
