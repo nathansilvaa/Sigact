@@ -1,12 +1,13 @@
 package com.example.SIGACTI.model.entities;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,20 +23,30 @@ public class Processo {
     private String interessados;
     private String assunto;
     private String resumoObjeto;
+    // Relacionamento OneToMany com Contrato
+    @OneToMany(mappedBy = "processo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("processo")
+    private List<Contrato> contratos = new ArrayList<>();
+
+    @OneToMany(mappedBy = "processo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<Inexigibilidade> inexigibilidades = new ArrayList<>();
 
     public Processo(){
 
     }
 
-    public Processo(String processo, String unidadeGestora, String situacao, Double valorPrevisto, Date dataAtuacao, String interessados, String assunto, String resumoObjeto) {
-        this.processo = processo;
-        this.unidadeGestora = unidadeGestora;
-        this.situacao = situacao;
-        this.valorPrevisto = valorPrevisto;
-        this.dataAtuacao = dataAtuacao;
-        this.interessados = interessados;
-        this.assunto = assunto;
+    public Processo(List<Inexigibilidade> inexigibilidades, List<Contrato> contratos, String resumoObjeto, String assunto, String interessados, Date dataAtuacao, Double valorPrevisto, String situacao, String unidadeGestora, String processo) {
+        this.inexigibilidades = inexigibilidades;
+        this.contratos = contratos;
         this.resumoObjeto = resumoObjeto;
+        this.assunto = assunto;
+        this.interessados = interessados;
+        this.dataAtuacao = dataAtuacao;
+        this.valorPrevisto = valorPrevisto;
+        this.situacao = situacao;
+        this.unidadeGestora = unidadeGestora;
+        this.processo = processo;
     }
 
     public @NotBlank String getProcesso() {
@@ -52,6 +63,14 @@ public class Processo {
 
     public void setUnidadeGestora(String unidadeGestora) {
         this.unidadeGestora = unidadeGestora;
+    }
+
+    public List<Inexigibilidade> getInexigibilidades() {
+        return inexigibilidades;
+    }
+
+    public void setInexigibilidades(List<Inexigibilidade> inexigibilidades) {
+        this.inexigibilidades = inexigibilidades;
     }
 
     public String getSituacao() {
@@ -102,6 +121,14 @@ public class Processo {
         this.resumoObjeto = resumoObjeto;
     }
 
+    public List<Contrato> getContratos() {
+        return contratos;
+    }
+
+    public void setContratos(List<Contrato> contratos) {
+        this.contratos = contratos;
+    }
+
     @Override
     public String toString() {
         return "Processo{" +
@@ -113,6 +140,7 @@ public class Processo {
                 ", interessados='" + interessados + '\'' +
                 ", assunto='" + assunto + '\'' +
                 ", resumoObjeto='" + resumoObjeto + '\'' +
+                ", contratos=" + contratos +
                 '}';
     }
 }

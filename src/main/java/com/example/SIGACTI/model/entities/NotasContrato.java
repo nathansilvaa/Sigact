@@ -1,6 +1,7 @@
 package com.example.SIGACTI.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -14,11 +15,17 @@ public class NotasContrato{
     @Id
     @NotBlank
     private String notaFiscal;
+
     @ManyToOne
     @JoinColumn(name = "contrato", nullable = false)
     @JsonIgnore
     private Contrato contrato;
-    private String processo;
+
+    @ManyToOne
+    @JoinColumn(name = "processo", nullable = false)
+    @JsonIgnore
+    private Processo processo;
+
     private String objeto;
     private String contratado;
     private String cnpj;
@@ -27,19 +34,29 @@ public class NotasContrato{
     private String fiscalContrato;
     private String gestorContrato;
 
-    public NotasContrato(String gestorContrato, String fiscalContrato, String atesto, Double valorContra, String cnpj, String contratado, String objeto, String processo, Contrato contrato, String notaFiscal) {
-        this.gestorContrato = gestorContrato;
-        this.fiscalContrato = fiscalContrato;
-        this.atesto = atesto;
-        this.valorContra = valorContra;
-        this.cnpj = cnpj;
-        this.contratado = contratado;
-        this.objeto = objeto;
-        this.processo = processo;
-        this.contrato = contrato;
+    public NotasContrato(String notaFiscal, Contrato contrato, Processo processo, String objeto, String contratado, String cnpj, Double valorContra, String atesto, String fiscalContrato, String gestorContrato) {
         this.notaFiscal = notaFiscal;
+        this.contrato = contrato;
+        this.processo = processo;
+        this.objeto = objeto;
+        this.contratado = contratado;
+        this.cnpj = cnpj;
+        this.valorContra = valorContra;
+        this.atesto = atesto;
+        this.fiscalContrato = fiscalContrato;
+        this.gestorContrato = gestorContrato;
     }
-    public NotasContrato(){
+
+    @JsonProperty("contrato")
+    public String getContratoId() {
+        return contrato.getContrato();
+    }
+
+    @JsonProperty("processo")
+    public String getProcessoId() {
+        return processo.getProcesso();
+    }
+    public  NotasContrato(){
 
     }
     public @NotBlank String getNotaFiscal() {
@@ -58,11 +75,11 @@ public class NotasContrato{
         this.contrato = contrato;
     }
 
-    public String getProcesso() {
+    public Processo getProcesso() {
         return processo;
     }
 
-    public void setProcesso(String processo) {
+    public void setProcesso(Processo processo) {
         this.processo = processo;
     }
 
@@ -127,7 +144,7 @@ public class NotasContrato{
         return "NotasContrato{" +
                 "notaFiscal='" + notaFiscal + '\'' +
                 ", contrato=" + contrato +
-                ", processo='" + processo + '\'' +
+                ", processo=" + processo +
                 ", objeto='" + objeto + '\'' +
                 ", contratado='" + contratado + '\'' +
                 ", cnpj='" + cnpj + '\'' +

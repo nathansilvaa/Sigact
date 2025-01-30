@@ -1,5 +1,8 @@
 package com.example.SIGACTI.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -12,6 +15,7 @@ import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@JsonIgnoreProperties("notasContrato") // Evita recursão infinita
 public class Contrato {
     @Id
     @NotBlank
@@ -22,6 +26,7 @@ public class Contrato {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "processo", nullable = false)
+    @JsonManagedReference
     private Processo processo;
 
     @NotNull

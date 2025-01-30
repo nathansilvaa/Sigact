@@ -1,5 +1,7 @@
 package com.example.SIGACTI.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
@@ -12,7 +14,11 @@ public class Inexigibilidade{
     @NotBlank
     @Id
     private String portaria;
-    private String processo;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "processo", nullable = false)
+    @JsonBackReference
+    private Processo processo;
     private String resumoObjeto;
     private String interessado;
     private String sgd;
@@ -36,7 +42,7 @@ public class Inexigibilidade{
 
     }
 
-    public Inexigibilidade(String portaria, String processo, String resumoObjeto, String interessado, String sgd, String objeto, String statusContrato, String funLegal, String naturezaServiço, Date dataContrato, Integer prazoContrato, Date vigencia, Double valorContrato, Double saldo, String situacaoVigencia, double consumido, List<NotasInexigibilidade> notasInexigibilidade) {
+    public Inexigibilidade(String portaria, Processo processo, String resumoObjeto, String interessado, String sgd, String objeto, String statusContrato, String funLegal, String naturezaServiço, Date dataContrato, Integer prazoContrato, Date vigencia, Double valorContrato, Double saldo, String situacaoVigencia, double consumido, List<NotasInexigibilidade> notasInexigibilidade) {
         this.portaria = portaria;
         this.processo = processo;
         this.resumoObjeto = resumoObjeto;
@@ -64,11 +70,11 @@ public class Inexigibilidade{
         this.portaria = portaria;
     }
 
-    public String getProcesso() {
+    public Processo getProcesso() {
         return processo;
     }
 
-    public void setProcesso(String processo) {
+    public void setProcesso(Processo processo) {
         this.processo = processo;
     }
 
@@ -196,7 +202,7 @@ public class Inexigibilidade{
     public String toString() {
         return "Inexigibilidade{" +
                 "portaria='" + portaria + '\'' +
-                ", processo='" + processo + '\'' +
+                ", processo=" + processo +
                 ", resumoObjeto='" + resumoObjeto + '\'' +
                 ", interessado='" + interessado + '\'' +
                 ", sgd='" + sgd + '\'' +
