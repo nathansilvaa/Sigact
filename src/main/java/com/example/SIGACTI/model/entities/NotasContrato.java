@@ -49,12 +49,12 @@ public class NotasContrato{
 
     @JsonProperty("contrato")
     public String getContratoId() {
-        return contrato.getContrato();
+        return contrato.getIdContrato();
     }
 
     @JsonProperty("processo")
     public String getProcessoId() {
-        return processo.getProcesso();
+        return processo.getIdProcesso();
     }
     public  NotasContrato(){
 

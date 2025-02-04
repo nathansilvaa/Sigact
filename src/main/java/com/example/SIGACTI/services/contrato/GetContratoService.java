@@ -1,27 +1,33 @@
 package com.example.SIGACTI.services.contrato;
 
+import com.example.SIGACTI.dto.ContratoResponse;
 import com.example.SIGACTI.model.entities.Contrato;
 import com.example.SIGACTI.model.repositories.ContratoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class GetContratoService {
-    @Autowired
-    private ContratoRepository contratoRepository;
+    private final ContratoRepository contratoRepository;
 
-    public List<Contrato> listarTodos() {
-        return (List<Contrato>) contratoRepository.findAll();
+    public GetContratoService(ContratoRepository contratoRepository) {
+        this.contratoRepository = contratoRepository;
     }
 
-    public Optional<Contrato> buscarPorId(String id) {
-        return contratoRepository.findById(id);
+    // Método para buscar todos os contratos
+    public List<ContratoResponse> obterTodosContratos() {
+        List<Contrato> contratos = (List<Contrato>) contratoRepository.findAll();
+        return contratos.stream()
+                .map(ContratoResponse::conveterContrato)
+                .collect(Collectors.toList());
     }
 
-    public boolean existePorId(String id) {
-        return contratoRepository.existsById(id);
+    // Método para buscar um contrato específico pelo ID
+    public Optional<ContratoResponse> obterContratoPorId(String idContrato) {
+        Optional<Contrato> contratoOpt = contratoRepository.findById(idContrato);
+        return contratoOpt.map(ContratoResponse::conveterContrato);
     }
 }

@@ -1,13 +1,11 @@
 package com.example.SIGACTI.controllers.contrato;
 
-import com.example.SIGACTI.dto.ContratoDto;
+import com.example.SIGACTI.dto.ContratoRequest;
+import com.example.SIGACTI.dto.ContratoResponse;
 import com.example.SIGACTI.model.entities.Contrato;
 import com.example.SIGACTI.services.contrato.CreateContratoService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,13 +22,10 @@ public class CreateContratoController {
         this.service = service;
     }
     @PostMapping
-    public ResponseEntity<Contrato> salvar(@RequestBody @Valid ContratoDto contratoDto) {
+    public ResponseEntity<ContratoResponse> salvar(@RequestBody @Valid ContratoRequest contratoDto) {
         // Converter DTO para Entidade
-        Contrato contrato = service.converterDtoParaEntidade(contratoDto);
+        ContratoResponse contrato = service.salvar(contratoDto);
 
-        // Salvar contrato no banco
-        Contrato contratoSalvo = service.salvar(contrato);
-
-        return ResponseEntity.ok(contratoSalvo);
+        return ResponseEntity.ok(contrato);
     }
 }

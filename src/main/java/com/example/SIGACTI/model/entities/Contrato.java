@@ -19,7 +19,8 @@ import java.util.List;
 public class Contrato {
     @Id
     @NotBlank
-    private String contrato;
+    @Column(name = "ID_NUMERO_CONTRATO")
+    private String idContrato;
 
     @OneToMany(mappedBy = "contrato", cascade = CascadeType.ALL)
     private List<NotasContrato> notasContrato = new ArrayList<>();
@@ -81,8 +82,8 @@ public class Contrato {
 
     }
 
-    public Contrato(String contrato, List<NotasContrato> notasContrato, Processo processo, Date orcamento, int acaoOrcamentaria, int fonteRecurso, String tipoContratacao, String contratado, int numeroAltomatico, String objeto, String statusContrato, String funLegal, String naturezaServico, Date dataContrato, Date vigenciaInicial, Double valorContrato, Double saldo, float consumido, String situacaoVigencia) {
-        this.contrato = contrato;
+    public Contrato(String idContrato, List<NotasContrato> notasContrato, Processo processo, Date orcamento, int acaoOrcamentaria, int fonteRecurso, String tipoContratacao, String contratado, int numeroAltomatico, String objeto, String statusContrato, String funLegal, String naturezaServico, Date dataContrato, Date vigenciaInicial, Double valorContrato, Double saldo, float consumido, String situacaoVigencia) {
+        this.idContrato = idContrato;
         this.notasContrato = notasContrato;
         this.processo = processo;
         this.orcamento = orcamento;
@@ -103,12 +104,20 @@ public class Contrato {
         this.situacaoVigencia = situacaoVigencia;
     }
 
-    public @NotBlank String getContrato() {
-        return contrato;
+    public @NotBlank String getIdContrato() {
+        return idContrato;
     }
 
-    public void setContrato(@NotBlank String contrato) {
-        this.contrato = contrato;
+    public void setIdContrato(@NotBlank String idContrato) {
+        this.idContrato = idContrato;
+    }
+
+    public List<NotasContrato> getNotasContrato() {
+        return notasContrato;
+    }
+
+    public void setNotasContrato(List<NotasContrato> notasContrato) {
+        this.notasContrato = notasContrato;
     }
 
     public Processo getProcesso() {
@@ -234,11 +243,11 @@ public class Contrato {
         this.saldo = saldo;
     }
 
-    public double getConsumido() {
+    public float getConsumido() {
         return consumido;
     }
 
-    public void setConsumido(Float consumido) {
+    public void setConsumido(float consumido) {
         this.consumido = consumido;
     }
 
@@ -253,7 +262,8 @@ public class Contrato {
     @Override
     public String toString() {
         return "Contrato{" +
-                "contrato='" + contrato + '\'' +
+                "idContrato='" + idContrato + '\'' +
+                ", notasContrato=" + notasContrato +
                 ", processo=" + processo +
                 ", orcamento=" + orcamento +
                 ", acaoOrcamentaria=" + acaoOrcamentaria +
@@ -272,17 +282,5 @@ public class Contrato {
                 ", consumido=" + consumido +
                 ", situacaoVigencia='" + situacaoVigencia + '\'' +
                 '}';
-    }
-
-    public List<NotasContrato> getNotasContrato() {
-        return notasContrato;
-    }
-
-    public void setNotasContrato(List<NotasContrato> notasContrato) {
-        this.notasContrato = notasContrato;
-    }
-
-    public void setConsumido(float consumido) {
-        this.consumido = consumido;
     }
 }

@@ -14,7 +14,8 @@ import java.util.List;
 @Entity
 public class Processo {
     @Id
-    private String processo;
+    @Column(name = "ID_NUMERO_PROCESSO")
+    private String idProcesso;
     private String unidadeGestora;
     private String situacao;
     @Min(0)
@@ -36,25 +37,25 @@ public class Processo {
 
     }
 
-    public Processo(List<Inexigibilidade> inexigibilidades, List<Contrato> contratos, String resumoObjeto, String assunto, String interessados, Date dataAtuacao, Double valorPrevisto, String situacao, String unidadeGestora, String processo) {
-        this.inexigibilidades = inexigibilidades;
-        this.contratos = contratos;
-        this.resumoObjeto = resumoObjeto;
-        this.assunto = assunto;
-        this.interessados = interessados;
-        this.dataAtuacao = dataAtuacao;
-        this.valorPrevisto = valorPrevisto;
-        this.situacao = situacao;
+    public Processo(String idProcesso, String unidadeGestora, String situacao, Double valorPrevisto, Date dataAtuacao, String interessados, String assunto, String resumoObjeto, List<Contrato> contratos, List<Inexigibilidade> inexigibilidades) {
+        this.idProcesso = idProcesso;
         this.unidadeGestora = unidadeGestora;
-        this.processo = processo;
+        this.situacao = situacao;
+        this.valorPrevisto = valorPrevisto;
+        this.dataAtuacao = dataAtuacao;
+        this.interessados = interessados;
+        this.assunto = assunto;
+        this.resumoObjeto = resumoObjeto;
+        this.contratos = contratos;
+        this.inexigibilidades = inexigibilidades;
     }
 
-    public @NotBlank String getProcesso() {
-        return processo;
+    public String getIdProcesso() {
+        return idProcesso;
     }
 
-    public void setProcesso(@NotBlank String processo) {
-        this.processo = processo;
+    public void setIdProcesso(String idProcesso) {
+        this.idProcesso = idProcesso;
     }
 
     public String getUnidadeGestora() {
@@ -63,14 +64,6 @@ public class Processo {
 
     public void setUnidadeGestora(String unidadeGestora) {
         this.unidadeGestora = unidadeGestora;
-    }
-
-    public List<Inexigibilidade> getInexigibilidades() {
-        return inexigibilidades;
-    }
-
-    public void setInexigibilidades(List<Inexigibilidade> inexigibilidades) {
-        this.inexigibilidades = inexigibilidades;
     }
 
     public String getSituacao() {
@@ -129,10 +122,18 @@ public class Processo {
         this.contratos = contratos;
     }
 
+    public List<Inexigibilidade> getInexigibilidades() {
+        return inexigibilidades;
+    }
+
+    public void setInexigibilidades(List<Inexigibilidade> inexigibilidades) {
+        this.inexigibilidades = inexigibilidades;
+    }
+
     @Override
     public String toString() {
         return "Processo{" +
-                "processo='" + processo + '\'' +
+                "idProcesso='" + idProcesso + '\'' +
                 ", unidadeGestora='" + unidadeGestora + '\'' +
                 ", situacao='" + situacao + '\'' +
                 ", valorPrevisto=" + valorPrevisto +
@@ -141,6 +142,7 @@ public class Processo {
                 ", assunto='" + assunto + '\'' +
                 ", resumoObjeto='" + resumoObjeto + '\'' +
                 ", contratos=" + contratos +
+                ", inexigibilidades=" + inexigibilidades +
                 '}';
     }
 }
