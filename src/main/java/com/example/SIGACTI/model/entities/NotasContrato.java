@@ -17,31 +17,31 @@ public class NotasContrato{
     private String notaFiscal;
 
     @ManyToOne
-    @JoinColumn(name = "contrato", nullable = false)
+    @JoinColumn(name = "CONTRATO", nullable = false)
     @JsonIgnore
     private Contrato contrato;
 
     @ManyToOne
-    @JoinColumn(name = "processo", nullable = false)
+    @JoinColumn(name = "PROCESSO", nullable = false)
     @JsonIgnore
     private Processo processo;
 
     private String objeto;
     private String contratado;
     private String cnpj;
-    private Double valorContra;
+    private Double valorContrato;
     private String atesto;
     private String fiscalContrato;
     private String gestorContrato;
 
-    public NotasContrato(String notaFiscal, Contrato contrato, Processo processo, String objeto, String contratado, String cnpj, Double valorContra, String atesto, String fiscalContrato, String gestorContrato) {
+    public NotasContrato(String notaFiscal, Contrato contrato, Processo processo, String objeto, String contratado, String cnpj, Double valorContrato, String atesto, String fiscalContrato, String gestorContrato) {
         this.notaFiscal = notaFiscal;
         this.contrato = contrato;
         this.processo = processo;
         this.objeto = objeto;
         this.contratado = contratado;
         this.cnpj = cnpj;
-        this.valorContra = valorContra;
+        this.valorContrato = valorContrato;
         this.atesto = atesto;
         this.fiscalContrato = fiscalContrato;
         this.gestorContrato = gestorContrato;
@@ -107,12 +107,12 @@ public class NotasContrato{
         this.cnpj = cnpj;
     }
 
-    public Double getValorContra() {
-        return valorContra;
+    public Double getValorContrato() {
+        return valorContrato;
     }
 
-    public void setValorContra(Double valorContra) {
-        this.valorContra = valorContra;
+    public void setValorContrato(Double valorContra) {
+        this.valorContrato = valorContra;
     }
 
     public String getAtesto() {
@@ -139,6 +139,8 @@ public class NotasContrato{
         this.gestorContrato = gestorContrato;
     }
 
+
+
     @Override
     public String toString() {
         return "NotasContrato{" +
@@ -148,10 +150,11 @@ public class NotasContrato{
                 ", objeto='" + objeto + '\'' +
                 ", contratado='" + contratado + '\'' +
                 ", cnpj='" + cnpj + '\'' +
-                ", valorContra=" + valorContra +
+                ", valorContra=" + valorContrato +
                 ", atesto='" + atesto + '\'' +
                 ", fiscalContrato='" + fiscalContrato + '\'' +
                 ", gestorContrato='" + gestorContrato + '\'' +
                 '}';
     }
+
 }

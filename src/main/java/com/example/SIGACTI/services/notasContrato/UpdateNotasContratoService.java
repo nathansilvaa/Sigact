@@ -12,21 +12,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.naming.directory.InvalidAttributesException;
 import java.util.Optional;
 
 @Service
 @Transactional
-public class CreateNotasContratoService {
+public class UpdateNotasContratoService {
 
-    @Autowired
     private final NotasContratoRepository notasContratoRepository;
-    @Autowired
     private final ContratoRepository contratoRepository;
-    @Autowired
     private final ProcessoRepository processoRepository;
 
-    public CreateNotasContratoService(NotasContratoRepository notasContratoRepository,
+    @Autowired
+    public UpdateNotasContratoService(NotasContratoRepository notasContratoRepository,
                                       ContratoRepository contratoRepository,
                                       ProcessoRepository processoRepository) {
         this.notasContratoRepository = notasContratoRepository;
@@ -34,27 +31,36 @@ public class CreateNotasContratoService {
         this.processoRepository = processoRepository;
     }
 
-    public NotasContratoResponse salvar(NotasContratoRequest notasContratoDto) {
-        try {
-            NotasContrato notasContrato = notasContratoDto.converterNotasContrato(processoRepository, contratoRepository);
+    public Optional<NotasContratoResponse> atualizarNotasContrato(String notaFiscal, NotasContratoRequest notasContratoDto) {
+        Optional<NotasContrato> notasContratoOpt = notasContratoRepository.findById(notaFiscal);
 
-            Optional<Processo> processo = processoRepository.findById(notasContratoDto.processo());
-            Optional<Contrato> contrato = contratoRepository.findById(notasContratoDto.contrato());
+        if (notasContratoOpt.isPresent()) {
+            NotasContrato notasContrato = notasContratoOpt.get();
 
-            if (processo.isPresent()) {
-                notasContrato.setProcesso(processo.get());
-            } else {
-                throw new InvalidAttributesException("ID do processo inválido: " + notasContratoDto.processo());
+            // Atualizando os campos da nota de contrato
+            notasContrato.setObjeto(notasContratoDto.objeto());
+            notasContrato.setContratado(notasContratoDto.contratado());
+            notasContrato.setCnpj(notasContratoDto.cnpj());
+            notasContrato.setValorContrato(notasContratoDto.valorContrato());
+            notasContrato.setAtesto(notasContratoDto.atesto());
+            notasContrato.setFiscalContrato(notasContratoDto.fiscalContrato());
+            notasContrato.setGestorContrato(notasContratoDto.gestorContrato());
+
+            // Atualiza o processo, se necessário
+            if (notasContratoDto.processo() != null) {
+                Optional<Processo> processoOpt = processoRepository.findById(notasContratoDto.processo());
+                processoOpt.ifPresent(notasContrato::setProcesso);
             }
 
-            if (contrato.isPresent()) {
-                notasContrato.setContrato(contrato.get());
-            } else {
-                throw new InvalidAttributesException("ID do contrato inválido: " + notasContratoDto.contrato());
+            // Atualiza o contrato, se necessário
+            if (notasContratoDto.contrato() != null) {
+                Optional<Contrato> contratoOpt = contratoRepository.findById(notasContratoDto.contrato());
+                contratoOpt.ifPresent(notasContrato::setContrato);
             }
 
             notasContratoRepository.save(notasContrato);
-            return new NotasContratoResponse(
+
+            return Optional.of(new NotasContratoResponse(
                     notasContrato.getNotaFiscal(),
                     notasContrato.getContrato(),
                     notasContrato.getProcesso(),
@@ -65,10 +71,9 @@ public class CreateNotasContratoService {
                     notasContrato.getAtesto(),
                     notasContrato.getFiscalContrato(),
                     notasContrato.getGestorContrato()
-            );
-        } catch (Exception erro) {
-            erro.printStackTrace();
-            return null;
+            ));
+        } else {
+            return Optional.empty(); // Retorna vazio caso a nota de contrato não seja encontrada
         }
     }
 }

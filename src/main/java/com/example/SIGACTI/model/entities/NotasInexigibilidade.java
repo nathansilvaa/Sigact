@@ -1,3 +1,4 @@
+
 package com.example.SIGACTI.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -16,7 +17,7 @@ public class NotasInexigibilidade{
     @ManyToOne
     @JoinColumn(name = "portaria", nullable = false)
     @JsonIgnore
-    private Inexigibilidade inexigibilidade;
+    private Inexigibilidade portaria;
     private String sgd;
     private String processo;
     private String unidade;
@@ -28,10 +29,12 @@ public class NotasInexigibilidade{
     private String atesto;
     private String responsavelRecebimento;
 
+    public NotasInexigibilidade() {
 
-    public NotasInexigibilidade(String notaFiscal, Inexigibilidade inexigibilidade, String sgd, String processo, String unidade, String objeto, String contratado, String cnpj, Double valorTotal, Date emissao, String atesto, String responsavelRecebimento) {
+    }
+    public NotasInexigibilidade(String notaFiscal, Inexigibilidade portaria, String sgd, String processo, String unidade, String objeto, String contratado, String cnpj, Double valorTotal, Date emissao, String atesto, String responsavelRecebimento) {
         this.notaFiscal = notaFiscal;
-        this.inexigibilidade = inexigibilidade;
+        this.portaria = portaria;
         this.sgd = sgd;
         this.processo = processo;
         this.unidade = unidade;
@@ -44,10 +47,6 @@ public class NotasInexigibilidade{
         this.responsavelRecebimento = responsavelRecebimento;
     }
 
-    public NotasInexigibilidade() {
-
-    }
-
     public @NotBlank String getNotaFiscal() {
         return notaFiscal;
     }
@@ -56,12 +55,12 @@ public class NotasInexigibilidade{
         this.notaFiscal = notaFiscal;
     }
 
-    public Inexigibilidade getInexigibilidade() {
-        return inexigibilidade;
+    public Inexigibilidade getPortaria() {
+        return portaria;
     }
 
-    public void setInexigibilidade(Inexigibilidade inexigibilidade) {
-        this.inexigibilidade = inexigibilidade;
+    public void setPortaria(Inexigibilidade portaria) {
+        this.portaria = portaria;
     }
 
     public String getSgd() {
@@ -148,7 +147,7 @@ public class NotasInexigibilidade{
     public String toString() {
         return "NotasInexigibilidade{" +
                 "notaFiscal='" + notaFiscal + '\'' +
-                ", inexigibilidade=" + inexigibilidade +
+                ", portaria=" + portaria +
                 ", sgd='" + sgd + '\'' +
                 ", processo='" + processo + '\'' +
                 ", unidade='" + unidade + '\'' +
@@ -162,3 +161,4 @@ public class NotasInexigibilidade{
                 '}';
     }
 }
+

@@ -2,8 +2,9 @@ package com.example.SIGACTI.controllers.processo;
 
 import com.example.SIGACTI.dto.ProcessoRequest;
 import com.example.SIGACTI.dto.ProcessoResponse;
+import com.example.SIGACTI.services.contrato.CreateContratoService;
+import com.example.SIGACTI.services.processo.CreateProcessoService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +17,7 @@ public class CreateProcessoController {
 
     private final CreateProcessoService createProcessoService;
 
-    public CreateProcessoController(CreateProcessoService service) {
+    public CreateProcessoController(CreateProcessoService createProcessoService) {
         this.createProcessoService = createProcessoService;
     }
 

@@ -1,3 +1,4 @@
+
 package com.example.SIGACTI.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -34,8 +35,9 @@ public class Inexigibilidade{
     private String situacaoVigencia;
     private double consumido;
 
-    @OneToMany(mappedBy = "inexigibilidade", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "portaria", cascade = CascadeType.ALL)
     private List<NotasInexigibilidade> notasInexigibilidade = new ArrayList<>();
+
 
 
     public Inexigibilidade(){
@@ -221,3 +223,4 @@ public class Inexigibilidade{
                 '}';
     }
 }
+
