@@ -1,7 +1,8 @@
 package com.example.SIGACTI.dto;
 
+import com.example.SIGACTI.model.entities.CompraDireta;
 import com.example.SIGACTI.model.entities.Contrato;
-import com.example.SIGACTI.model.entities.Inexigibilidade;
+
 import com.example.SIGACTI.model.entities.Processo;
 
 import java.util.Date;
@@ -17,7 +18,7 @@ public record ProcessoResponse(
         String assunto,
         String resumoObjeto,
         List<Contrato>contratos,
-        List<Inexigibilidade> inexigibilidades
+        List<CompraDireta> compraDireta
 
 ) {
     public static ProcessoResponse conveterProcesso(Processo processo) {
@@ -31,7 +32,7 @@ public record ProcessoResponse(
                 processo.getAssunto(),
                 processo.getResumoObjeto(),
                 processo.getContratos(),
-                processo.getInexigibilidades()
+                processo.getComprasDireta()
         );
         return processoResponse;
     }

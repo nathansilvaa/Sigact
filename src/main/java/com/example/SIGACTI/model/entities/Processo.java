@@ -31,13 +31,13 @@ public class Processo {
 
     @OneToMany(mappedBy = "processo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
-    private List<Inexigibilidade> inexigibilidades = new ArrayList<>();
+    private List<CompraDireta> comprasDireta = new ArrayList<>();
 
     public Processo(){
 
     }
 
-    public Processo(String idProcesso, String unidadeGestora, String situacao, Double valorPrevisto, Date dataAtuacao, String interessados, String assunto, String resumoObjeto, List<Contrato> contratos, List<Inexigibilidade> inexigibilidades) {
+    public Processo(String idProcesso, String unidadeGestora, String situacao, Double valorPrevisto, Date dataAtuacao, String interessados, String assunto, String resumoObjeto, List<Contrato> contratos, List<CompraDireta> comprasDireta) {
         this.idProcesso = idProcesso;
         this.unidadeGestora = unidadeGestora;
         this.situacao = situacao;
@@ -47,7 +47,7 @@ public class Processo {
         this.assunto = assunto;
         this.resumoObjeto = resumoObjeto;
         this.contratos = contratos;
-        this.inexigibilidades = inexigibilidades;
+        this.comprasDireta = comprasDireta;
     }
 
     public String getIdProcesso() {
@@ -122,12 +122,12 @@ public class Processo {
         this.contratos = contratos;
     }
 
-    public List<Inexigibilidade> getInexigibilidades() {
-        return inexigibilidades;
+    public List<CompraDireta> getComprasDireta() {
+        return comprasDireta;
     }
 
-    public void setInexigibilidades(List<Inexigibilidade> inexigibilidades) {
-        this.inexigibilidades = inexigibilidades;
+    public void setComprasDireta(List<CompraDireta> comprasDireta) {
+        this.comprasDireta = comprasDireta;
     }
 
     @Override
@@ -142,7 +142,7 @@ public class Processo {
                 ", assunto='" + assunto + '\'' +
                 ", resumoObjeto='" + resumoObjeto + '\'' +
                 ", contratos=" + contratos +
-                ", inexigibilidades=" + inexigibilidades +
+                ", ComprasDireta=" + comprasDireta +
                 '}';
     }
 }

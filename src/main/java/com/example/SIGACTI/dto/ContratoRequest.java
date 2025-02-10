@@ -35,7 +35,7 @@ public record ContratoRequest(
         Contrato contrato = new Contrato();
         contrato.setIdContrato(request.idNumeroContrato());
         contrato.setOrcamento(request.orcamento());
-        contrato.setFonteRecurso(request.fonteRecurso);
+        contrato.setFonteRecurso(request.fonteRecurso());
         contrato.setTipoContratacao(request.tipoContratacao());
         contrato.setContratado(request.contratado());
         contrato.setNumeroAltomatico(request.numeroAltomatico());
