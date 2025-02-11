@@ -25,7 +25,7 @@ public class UpdateContratoService {
         this.processoRepository = processoRepository;
     }
 
-    public Optional<ContratoResponse> atualizarContrato(String idContrato, ContratoRequest contratoDto) {
+    public Optional<ContratoResponse> atualizarContrato(Long idContrato, ContratoRequest contratoDto) {
         Optional<Contrato> contratoOpt = contratoRepository.findById(idContrato);
 
         if (contratoOpt.isPresent()) {
@@ -45,7 +45,6 @@ public class UpdateContratoService {
             contrato.setDataContrato(contratoDto.dataContrato());
             contrato.setVigenciaInicial(contratoDto.vigenciaInicial());
             contrato.setValorContrato(contratoDto.valorContrato());
-            contrato.setSaldo(contratoDto.saldo());
             contrato.setConsumido(contratoDto.consumido());
             contrato.setSituacaoVigencia(contratoDto.situacaoVigencia());
 

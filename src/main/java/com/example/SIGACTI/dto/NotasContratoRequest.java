@@ -10,8 +10,8 @@ import java.util.Optional;
 
 public record NotasContratoRequest(
         String notaFiscal,
-        String contrato,
-        String processo,
+        Long idContrato,
+        Long idProcesso,
         String objeto,
         String contratado,
         String cnpj,
@@ -22,13 +22,9 @@ public record NotasContratoRequest(
 ) {
     public NotasContrato converterNotasContrato(ProcessoRepository processoRepository, ContratoRepository contratoRepository){
 
-        Processo processo2 = processoRepository.findById(processo).orElse(null);
-        Contrato contrato2 = contratoRepository.findById(contrato).orElse(null);
 
         NotasContrato notasContrato = new NotasContrato();
         notasContrato.setNotaFiscal(notaFiscal());
-        notasContrato.setContrato(contrato2);
-        notasContrato.setProcesso(processo2);
         notasContrato.setObjeto(objeto);
         notasContrato.setContratado(contratado);
         notasContrato.setCnpj(cnpj);

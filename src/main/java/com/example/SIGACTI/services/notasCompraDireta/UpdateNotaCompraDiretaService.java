@@ -25,7 +25,7 @@ public class UpdateNotaCompraDiretaService {
         this.compraDiretaRepository = compraDiretaRepository;
     }
 
-    public Optional<NotasCompraDiretaResponse> atualizarNotaCompraDireta(String notaFiscal, NotasCompraDiretaRequest request) {
+    public Optional<NotasCompraDiretaResponse> atualizarNotaCompraDireta(Long notaFiscal, NotasCompraDiretaRequest request) {
         Optional<NotasCompraDireta> notaOpt = notasCompraDiretaRepository.findById(notaFiscal);
 
         if (notaOpt.isPresent()) {
@@ -44,8 +44,8 @@ public class UpdateNotaCompraDiretaService {
             nota.setResponsavelRecebimento(request.responsavelRecebimento());
 
             // Atualiza a CompraDireta (portaria), se necessário
-            if (request.portaria() != null) {
-                Optional<CompraDireta> compraDiretaOpt = compraDiretaRepository.findById(request.portaria());
+            if (request.idCompraDireta() != null) {
+                Optional<CompraDireta> compraDiretaOpt = compraDiretaRepository.findById(request.idCompraDireta());
                 compraDiretaOpt.ifPresent(nota::setPortaria);
             }
 

@@ -26,7 +26,7 @@ public class GetContratoService {
     }
 
     // Método para buscar um contrato específico pelo ID
-    public Optional<ContratoResponse> obterContratoPorId(String idContrato) {
+    public Optional<ContratoResponse> obterContratoPorId(Long idContrato) {
         Optional<Contrato> contratoOpt = contratoRepository.findById(idContrato);
         return contratoOpt.map(ContratoResponse::conveterContrato);
     }

@@ -2,10 +2,7 @@ package com.example.SIGACTI.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
 
@@ -13,9 +10,11 @@ import jakarta.validation.constraints.NotBlank;
 @Entity
 public class NotasContrato{
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @NotBlank
+    @Column(unique = true)
     private String notaFiscal;
-
     @ManyToOne
     @JoinColumn(name = "CONTRATO", nullable = false)
     @JsonIgnore
@@ -34,7 +33,8 @@ public class NotasContrato{
     private String fiscalContrato;
     private String gestorContrato;
 
-    public NotasContrato(String notaFiscal, Contrato contrato, Processo processo, String objeto, String contratado, String cnpj, Double valorContrato, String atesto, String fiscalContrato, String gestorContrato) {
+    public NotasContrato(Long id, String notaFiscal, Contrato contrato, Processo processo, String objeto, String contratado, String cnpj, Double valorContrato, String atesto, String fiscalContrato, String gestorContrato) {
+        this.id = id;
         this.notaFiscal = notaFiscal;
         this.contrato = contrato;
         this.processo = processo;
@@ -46,19 +46,18 @@ public class NotasContrato{
         this.fiscalContrato = fiscalContrato;
         this.gestorContrato = gestorContrato;
     }
-
-    @JsonProperty("contrato")
-    public String getContratoId() {
-        return contrato.getIdContrato();
-    }
-
-    @JsonProperty("processo")
-    public String getProcessoId() {
-        return processo.getIdProcesso();
-    }
-    public  NotasContrato(){
+    public NotasContrato(){
 
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public @NotBlank String getNotaFiscal() {
         return notaFiscal;
     }
@@ -111,8 +110,8 @@ public class NotasContrato{
         return valorContrato;
     }
 
-    public void setValorContrato(Double valorContra) {
-        this.valorContrato = valorContra;
+    public void setValorContrato(Double valorContrato) {
+        this.valorContrato = valorContrato;
     }
 
     public String getAtesto() {
@@ -139,22 +138,20 @@ public class NotasContrato{
         this.gestorContrato = gestorContrato;
     }
 
-
-
     @Override
     public String toString() {
         return "NotasContrato{" +
-                "notaFiscal='" + notaFiscal + '\'' +
+                "id=" + id +
+                ", notaFiscal='" + notaFiscal + '\'' +
                 ", contrato=" + contrato +
                 ", processo=" + processo +
                 ", objeto='" + objeto + '\'' +
                 ", contratado='" + contratado + '\'' +
                 ", cnpj='" + cnpj + '\'' +
-                ", valorContra=" + valorContrato +
+                ", valorContrato=" + valorContrato +
                 ", atesto='" + atesto + '\'' +
                 ", fiscalContrato='" + fiscalContrato + '\'' +
                 ", gestorContrato='" + gestorContrato + '\'' +
                 '}';
     }
-
 }

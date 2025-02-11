@@ -16,7 +16,7 @@ public class DeleteNotasContratoService {
     }
 
     @Transactional
-    public boolean deletarNotasContrato(String notaFiscal) {
+    public boolean deletarNotasContrato(Long notaFiscal) {
         if (notasContratoRepository.existsById(notaFiscal)) {
             notasContratoRepository.deleteById(notaFiscal);
             return true;

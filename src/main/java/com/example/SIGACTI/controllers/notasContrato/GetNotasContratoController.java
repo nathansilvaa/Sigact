@@ -27,7 +27,7 @@ public class GetNotasContratoController {
 
     // Endpoint para buscar uma nota de contrato específica pelo ID (notaFiscal)
     @GetMapping
-    public ResponseEntity<NotasContratoResponse> obterNotaContratoPorId(@RequestParam String notaFiscal) {
+    public ResponseEntity<NotasContratoResponse> obterNotaContratoPorId(@RequestParam Long notaFiscal) {
         Optional<NotasContratoResponse> nota = service.obterNotaContratoPorId(notaFiscal);
         return nota.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());

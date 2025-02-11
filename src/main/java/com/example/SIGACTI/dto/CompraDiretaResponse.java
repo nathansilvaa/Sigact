@@ -6,8 +6,9 @@ import com.example.SIGACTI.model.entities.Processo;
 import java.util.Date;
 
 public record CompraDiretaResponse(
+        Long id,
         String portaria,
-        Processo processo,
+        ProcessoResponse processo,
         String resumoObjeto,
         String interessado,
         String sgd,
@@ -25,8 +26,9 @@ public record CompraDiretaResponse(
 ) {
     public static CompraDiretaResponse converterCompraDireta(CompraDireta compraDireta) {
         CompraDiretaResponse compraDiretaResponse = new CompraDiretaResponse(
+                compraDireta.getId(),
                 compraDireta.getPortaria(),
-                compraDireta.getProcesso(),
+                ProcessoResponse.conveterProcesso(compraDireta.getProcesso()),
                 compraDireta.getResumoObjeto(),
                 compraDireta.getInteressado(),
                 compraDireta.getSgd(),

@@ -27,7 +27,7 @@ public class GetCompraDiretaService {
     }
 
     // Método para buscar uma compra direta específica pelo ID
-    public Optional<CompraDiretaResponse> obterCompraDiretaPorId(String idCompraDireta) {
+    public Optional<CompraDiretaResponse> obterCompraDiretaPorId(Long idCompraDireta) {
         Optional<CompraDireta> compraDiretaOpt = compraDiretaRepository.findById(idCompraDireta);
         return compraDiretaOpt.map(CompraDiretaResponse::converterCompraDireta);
     }

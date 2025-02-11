@@ -21,7 +21,7 @@ public class DeleteContratoService {
     }
 
     @Transactional
-    public boolean deletarContrato(String idNumeroContrato) {
+    public boolean deletarContrato(Long idNumeroContrato) {
         if (contratoRepository.existsById(idNumeroContrato)) {
             contratoRepository.deleteById(idNumeroContrato);
             return true;

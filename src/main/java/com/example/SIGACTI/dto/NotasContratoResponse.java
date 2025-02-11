@@ -5,9 +5,10 @@ import com.example.SIGACTI.model.entities.NotasContrato;
 import com.example.SIGACTI.model.entities.Processo;
 
 public record NotasContratoResponse(
+        Long id,
         String notaFiscal,
-        Contrato contrato,
-        Processo processo,
+        ContratoResponse contrato,
+        ProcessoResponse processo,
         String objeto,
         String contratado,
         String cnpj,
@@ -18,9 +19,10 @@ public record NotasContratoResponse(
 ) {
     public static NotasContratoResponse converterNotasContrato(NotasContrato notasContrato) {
         NotasContratoResponse notasContratoResponse = new NotasContratoResponse(
+                notasContrato.getId(),
                 notasContrato.getNotaFiscal(),
-                notasContrato.getContrato(),
-                notasContrato.getProcesso(),
+                ContratoResponse.conveterContrato( notasContrato.getContrato()),
+                ProcessoResponse.conveterProcesso(notasContrato.getProcesso()),
                 notasContrato.getObjeto(),
                 notasContrato.getContratado(),
                 notasContrato.getCnpj(),

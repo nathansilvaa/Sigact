@@ -30,7 +30,7 @@ public class GetNotaCompraDiretaService {
     }
 
     // Método para obter uma nota específica pelo ID (notaFiscal)
-    public Optional<NotasCompraDiretaResponse> obterNotaPorId(String notaFiscal) {
+    public Optional<NotasCompraDiretaResponse> obterNotaPorId(Long notaFiscal) {
         Optional<NotasCompraDireta> notaOpt = notasCompraDiretaRepository.findById(notaFiscal);
         return notaOpt.map(NotasCompraDiretaResponse::converterNotasCompraDireta);
     }

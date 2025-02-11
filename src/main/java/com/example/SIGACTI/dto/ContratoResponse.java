@@ -10,8 +10,9 @@ import java.util.List;
 
 
 public record ContratoResponse(
+        Long id,
     String idNumeroContrato,
-    Processo processo,
+    ProcessoResponse processo,
     Date orcamento,
     int acaoOrcamentaria,
     int fonteRecurso,
@@ -34,8 +35,9 @@ public record ContratoResponse(
 ){
     public static ContratoResponse conveterContrato(Contrato contrato){
         ContratoResponse contratoResponse = new ContratoResponse(
+                contrato.getId(),
                 contrato.getIdContrato(),
-                contrato.getProcesso(),
+                ProcessoResponse.conveterProcesso(contrato.getProcesso()),
                 contrato.getOrcamento(),
                 contrato.getAcaoOrcamentaria(),
                 contrato.getFonteRecurso(),
@@ -49,7 +51,7 @@ public record ContratoResponse(
                 contrato.getDataContrato(),
                 contrato.getVigenciaInicial(),
                 contrato.getValorContrato(),
-                contrato.getSaldo(),
+                contrato.getSaldoRestanteContrato(),
                 contrato.getConsumido(),
                 contrato.getSituacaoVigencia(),
                 contrato.getNotasContrato()

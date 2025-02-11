@@ -22,7 +22,7 @@ public class UpdateProcessoController {
     // Endpoint para atualizar um processo existente
     @PutMapping
     public ResponseEntity<ProcessoResponse> atualizarProcesso(
-            @RequestParam String idProcesso,
+            @RequestParam Long idProcesso,
             @RequestBody @Valid ProcessoRequest request) {
 
         Optional<ProcessoResponse> processoAtualizado = service.atualizarProcesso(idProcesso, request);

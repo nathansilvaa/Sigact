@@ -21,7 +21,7 @@ public class UpdateNotasContratoController {
 
     @PutMapping
     public ResponseEntity<NotasContratoResponse> atualizarNotasContrato(
-            @RequestParam String notaFiscal,
+            @RequestParam Long notaFiscal,
             @RequestBody @Valid NotasContratoRequest notasContratoDto) {
 
         Optional<NotasContratoResponse> notasContratoAtualizada = service.atualizarNotasContrato(notaFiscal, notasContratoDto);

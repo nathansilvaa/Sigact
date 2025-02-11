@@ -1,7 +1,9 @@
 package com.example.SIGACTI.services.notasContrato;
 
+import com.example.SIGACTI.dto.ContratoResponse;
 import com.example.SIGACTI.dto.NotasContratoRequest;
 import com.example.SIGACTI.dto.NotasContratoResponse;
+import com.example.SIGACTI.dto.ProcessoResponse;
 import com.example.SIGACTI.model.entities.Contrato;
 import com.example.SIGACTI.model.entities.NotasContrato;
 import com.example.SIGACTI.model.entities.Processo;
@@ -38,26 +40,29 @@ public class CreateNotasContratoService {
         try {
             NotasContrato notasContrato = notasContratoDto.converterNotasContrato(processoRepository, contratoRepository);
 
-            Optional<Processo> processo = processoRepository.findById(notasContratoDto.processo());
-            Optional<Contrato> contrato = contratoRepository.findById(notasContratoDto.contrato());
+            Optional<Processo> processo = processoRepository.findById(notasContratoDto.idProcesso());
+            Optional<Contrato> contrato = contratoRepository.findById(notasContratoDto.idContrato());
 
             if (processo.isPresent()) {
                 notasContrato.setProcesso(processo.get());
             } else {
-                throw new InvalidAttributesException("ID do processo inválido: " + notasContratoDto.processo());
+                throw new InvalidAttributesException("ID do processo inválido: " + notasContratoDto.idProcesso());
             }
 
             if (contrato.isPresent()) {
                 notasContrato.setContrato(contrato.get());
             } else {
-                throw new InvalidAttributesException("ID do contrato inválido: " + notasContratoDto.contrato());
+                throw new InvalidAttributesException("ID do contrato inválido: " + notasContratoDto.idContrato());
             }
+
+            //cjama um metodo q realiza o calculo
 
             notasContratoRepository.save(notasContrato);
             return new NotasContratoResponse(
+                    notasContrato.getId(),
                     notasContrato.getNotaFiscal(),
-                    notasContrato.getContrato(),
-                    notasContrato.getProcesso(),
+                    ContratoResponse.conveterContrato(notasContrato.getContrato()),
+                    ProcessoResponse.conveterProcesso(notasContrato.getProcesso()),
                     notasContrato.getObjeto(),
                     notasContrato.getContratado(),
                     notasContrato.getCnpj(),

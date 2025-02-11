@@ -25,7 +25,7 @@ public class UpdateCompraDiretaService {
         this.processoRepository = processoRepository;
     }
 
-    public Optional<CompraDiretaResponse> atualizarCompraDireta(String idCompraDireta, CompraDiretaRequest compraDiretaDto) {
+    public Optional<CompraDiretaResponse> atualizarCompraDireta(Long idCompraDireta, CompraDiretaRequest compraDiretaDto) {
         Optional<CompraDireta> compraDiretaOpt = compraDiretaRepository.findById(idCompraDireta);
 
         if (compraDiretaOpt.isPresent()) {
@@ -49,8 +49,8 @@ public class UpdateCompraDiretaService {
             compraDireta.setConsumido(compraDiretaDto.consumido());
 
             // Atualiza o processo, se necessário
-            if (compraDiretaDto.processo() != null) {
-                Optional<Processo> processoOpt = processoRepository.findById(compraDiretaDto.processo());
+            if (compraDiretaDto.idprocesso() != null) {
+                Optional<Processo> processoOpt = processoRepository.findById(compraDiretaDto.idprocesso());
                 processoOpt.ifPresent(compraDireta::setProcesso);
             }
 

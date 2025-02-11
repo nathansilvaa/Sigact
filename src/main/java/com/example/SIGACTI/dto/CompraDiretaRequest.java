@@ -8,7 +8,7 @@ import java.util.Date;
 
 public record CompraDiretaRequest(
         String portaria,
-        String processo,
+        Long idprocesso,
         String resumoObjeto,
         String interessado,
         String sgd,
@@ -27,7 +27,7 @@ public record CompraDiretaRequest(
 ) {
     public CompraDireta converterCompraDireta(ProcessoRepository processoRepository){
 
-        Processo processo2 = processoRepository.findById(processo).orElse(null);
+        Processo processo2 = processoRepository.findById(idprocesso).orElse(null);
 
         CompraDireta  compraDireta = new CompraDireta();
         compraDireta.setPortaria(portaria);

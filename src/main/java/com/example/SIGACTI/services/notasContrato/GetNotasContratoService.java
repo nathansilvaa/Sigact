@@ -26,7 +26,7 @@ public class GetNotasContratoService {
     }
 
     // Método para buscar uma nota de contrato específica pelo ID (notaFiscal)
-    public Optional<NotasContratoResponse> obterNotaContratoPorId(String notaFiscal) {
+    public Optional<NotasContratoResponse> obterNotaContratoPorId(Long notaFiscal) {
         Optional<NotasContrato> notaOpt = notasContratoRepository.findById(notaFiscal);
         return notaOpt.map(NotasContratoResponse::converterNotasContrato);
     }

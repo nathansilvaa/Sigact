@@ -21,7 +21,7 @@ public class UpdateNotaCompraDiretaController {
 
     @PutMapping
     public ResponseEntity<NotasCompraDiretaResponse> atualizarNotaCompraDireta(
-            @RequestParam String notaFiscal,
+            @RequestParam Long notaFiscal,
             @RequestBody @Valid NotasCompraDiretaRequest request) {
 
         Optional<NotasCompraDiretaResponse> notaAtualizada = service.atualizarNotaCompraDireta(notaFiscal, request);

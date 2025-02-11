@@ -30,7 +30,7 @@ public class GetContratoController {
 
     // GET - Buscar contrato por ID
     @GetMapping
-    public ResponseEntity<ContratoResponse> obterContratoPorId(@RequestParam String idContrato) {
+    public ResponseEntity<ContratoResponse> obterContratoPorId(@RequestParam Long idContrato) {
         Optional<ContratoResponse> contratoOpt = getContratoService.obterContratoPorId(idContrato);
 
         return contratoOpt

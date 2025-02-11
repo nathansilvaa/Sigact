@@ -1,7 +1,9 @@
 package com.example.SIGACTI.services.notasContrato;
 
+import com.example.SIGACTI.dto.ContratoResponse;
 import com.example.SIGACTI.dto.NotasContratoRequest;
 import com.example.SIGACTI.dto.NotasContratoResponse;
+import com.example.SIGACTI.dto.ProcessoResponse;
 import com.example.SIGACTI.model.entities.Contrato;
 import com.example.SIGACTI.model.entities.NotasContrato;
 import com.example.SIGACTI.model.entities.Processo;
@@ -31,7 +33,7 @@ public class UpdateNotasContratoService {
         this.processoRepository = processoRepository;
     }
 
-    public Optional<NotasContratoResponse> atualizarNotasContrato(String notaFiscal, NotasContratoRequest notasContratoDto) {
+    public Optional<NotasContratoResponse> atualizarNotasContrato(Long notaFiscal, NotasContratoRequest notasContratoDto) {
         Optional<NotasContrato> notasContratoOpt = notasContratoRepository.findById(notaFiscal);
 
         if (notasContratoOpt.isPresent()) {
@@ -47,23 +49,24 @@ public class UpdateNotasContratoService {
             notasContrato.setGestorContrato(notasContratoDto.gestorContrato());
 
             // Atualiza o processo, se necessário
-            if (notasContratoDto.processo() != null) {
-                Optional<Processo> processoOpt = processoRepository.findById(notasContratoDto.processo());
+            if (notasContratoDto.idProcesso() != null) {
+                Optional<Processo> processoOpt = processoRepository.findById(notasContratoDto.idProcesso());
                 processoOpt.ifPresent(notasContrato::setProcesso);
             }
 
             // Atualiza o contrato, se necessário
-            if (notasContratoDto.contrato() != null) {
-                Optional<Contrato> contratoOpt = contratoRepository.findById(notasContratoDto.contrato());
+            if (notasContratoDto.idContrato() != null) {
+                Optional<Contrato> contratoOpt = contratoRepository.findById(notasContratoDto.idContrato());
                 contratoOpt.ifPresent(notasContrato::setContrato);
             }
 
             notasContratoRepository.save(notasContrato);
 
             return Optional.of(new NotasContratoResponse(
+                    notasContrato.getId(),
                     notasContrato.getNotaFiscal(),
-                    notasContrato.getContrato(),
-                    notasContrato.getProcesso(),
+                    ContratoResponse.conveterContrato(notasContrato.getContrato()),
+                    ProcessoResponse.conveterProcesso(notasContrato.getProcesso()),
                     notasContrato.getObjeto(),
                     notasContrato.getContratado(),
                     notasContrato.getCnpj(),

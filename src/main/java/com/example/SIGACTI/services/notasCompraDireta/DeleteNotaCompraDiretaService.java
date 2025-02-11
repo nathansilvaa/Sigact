@@ -15,7 +15,7 @@ public class DeleteNotaCompraDiretaService {
         this.notasCompraDiretaRepository = notasCompraDiretaRepository;
     }
 
-    public boolean deletarNotaCompraDireta(String notaFiscal) {
+    public boolean deletarNotaCompraDireta(Long notaFiscal) {
         if (notasCompraDiretaRepository.existsById(notaFiscal)) {
             notasCompraDiretaRepository.deleteById(notaFiscal);
             return true; // Deletado com sucesso

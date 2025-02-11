@@ -15,7 +15,7 @@ public class DeleteCompraDiretaController {
     }
 
     @DeleteMapping(params = "portaria")
-    public ResponseEntity<String> deletarCompraDireta(@RequestParam String portaria) {
+    public ResponseEntity<String> deletarCompraDireta(@RequestParam Long portaria) {
         boolean deletado = service.deletarCompraDireta(portaria);
 
         if (deletado) {

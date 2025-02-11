@@ -14,7 +14,9 @@ import java.util.List;
 @Entity
 public class Processo {
     @Id
-    @Column(name = "ID_NUMERO_PROCESSO")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(name = "ID_NUMERO_PROCESSO", unique = true)
     private String idProcesso;
     private String unidadeGestora;
     private String situacao;
@@ -37,7 +39,8 @@ public class Processo {
 
     }
 
-    public Processo(String idProcesso, String unidadeGestora, String situacao, Double valorPrevisto, Date dataAtuacao, String interessados, String assunto, String resumoObjeto, List<Contrato> contratos, List<CompraDireta> comprasDireta) {
+    public Processo(Long id, String idProcesso, String unidadeGestora, String situacao, Double valorPrevisto, Date dataAtuacao, String interessados, String assunto, String resumoObjeto, List<Contrato> contratos, List<CompraDireta> comprasDireta) {
+        this.id = id;
         this.idProcesso = idProcesso;
         this.unidadeGestora = unidadeGestora;
         this.situacao = situacao;
@@ -48,6 +51,14 @@ public class Processo {
         this.resumoObjeto = resumoObjeto;
         this.contratos = contratos;
         this.comprasDireta = comprasDireta;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getIdProcesso() {
@@ -133,7 +144,8 @@ public class Processo {
     @Override
     public String toString() {
         return "Processo{" +
-                "idProcesso='" + idProcesso + '\'' +
+                "id=" + id +
+                ", idProcesso='" + idProcesso + '\'' +
                 ", unidadeGestora='" + unidadeGestora + '\'' +
                 ", situacao='" + situacao + '\'' +
                 ", valorPrevisto=" + valorPrevisto +
@@ -142,7 +154,7 @@ public class Processo {
                 ", assunto='" + assunto + '\'' +
                 ", resumoObjeto='" + resumoObjeto + '\'' +
                 ", contratos=" + contratos +
-                ", ComprasDireta=" + comprasDireta +
+                ", comprasDireta=" + comprasDireta +
                 '}';
     }
 }

@@ -1,6 +1,6 @@
 package com.example.SIGACTI.model.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -18,8 +18,10 @@ import java.util.List;
 @JsonIgnoreProperties("notasContrato") // Evita recursão infinita
 public class Contrato {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @NotBlank
-    @Column(name = "ID_NUMERO_CONTRATO")
+    @Column(name = "ID_NUMERO_CONTRATO", unique = true, nullable = false)
     private String idContrato;
 
     @OneToMany(mappedBy = "contrato", cascade = CascadeType.ALL)
@@ -70,9 +72,6 @@ public class Contrato {
     @Min(0) // Valida que o valor seja maior ou igual a 0
     private Double valorContrato;
 
-    @NotNull
-    @Min(0) // Valida que o saldo seja maior ou igual a 0
-    private Double saldo;
     @Column(nullable = false, columnDefinition = "float default 0")
     private float consumido = 0;
 
@@ -82,7 +81,8 @@ public class Contrato {
 
     }
 
-    public Contrato(String idContrato, List<NotasContrato> notasContrato, Processo processo, Date orcamento, int acaoOrcamentaria, int fonteRecurso, String tipoContratacao, String contratado, int numeroAltomatico, String objeto, String statusContrato, String funLegal, String naturezaServico, Date dataContrato, Date vigenciaInicial, Double valorContrato, Double saldo, float consumido, String situacaoVigencia) {
+    public Contrato(Long id, String idContrato, List<NotasContrato> notasContrato, Processo processo, Date orcamento, int acaoOrcamentaria, int fonteRecurso, String tipoContratacao, String contratado, int numeroAltomatico, String objeto, String statusContrato, String funLegal, String naturezaServico, Date dataContrato, Date vigenciaInicial, Double valorContrato, float consumido, String situacaoVigencia) {
+        this.id = id;
         this.idContrato = idContrato;
         this.notasContrato = notasContrato;
         this.processo = processo;
@@ -99,9 +99,21 @@ public class Contrato {
         this.dataContrato = dataContrato;
         this.vigenciaInicial = vigenciaInicial;
         this.valorContrato = valorContrato;
-        this.saldo = saldo;
         this.consumido = consumido;
         this.situacaoVigencia = situacaoVigencia;
+    }
+
+    public Double getSaldoRestanteContrato() {
+        final Double valorNotas = this.getNotasContrato().stream().map(NotasContrato::getValorContrato).reduce(0.0, Double::sum);
+        return this.valorContrato - valorNotas;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public @NotBlank String getIdContrato() {
@@ -235,14 +247,6 @@ public class Contrato {
         this.valorContrato = valorContrato;
     }
 
-    public @NotNull @Min(0) Double getSaldo() {
-        return saldo;
-    }
-
-    public void setSaldo(@NotNull @Min(0) Double saldo) {
-        this.saldo = saldo;
-    }
-
     public float getConsumido() {
         return consumido;
     }
@@ -262,7 +266,8 @@ public class Contrato {
     @Override
     public String toString() {
         return "Contrato{" +
-                "idContrato='" + idContrato + '\'' +
+                "id=" + id +
+                ", idContrato='" + idContrato + '\'' +
                 ", notasContrato=" + notasContrato +
                 ", processo=" + processo +
                 ", orcamento=" + orcamento +
@@ -278,9 +283,10 @@ public class Contrato {
                 ", dataContrato=" + dataContrato +
                 ", vigenciaInicial=" + vigenciaInicial +
                 ", valorContrato=" + valorContrato +
-                ", saldo=" + saldo +
                 ", consumido=" + consumido +
                 ", situacaoVigencia='" + situacaoVigencia + '\'' +
                 '}';
     }
+
+
 }

@@ -29,7 +29,7 @@ public class CreateNotaCompraDiretaService {
     public NotasCompraDiretaResponse salvar(NotasCompraDiretaRequest request) {
         try {
             // Verificar se a CompraDireta (portaria) existe
-            Optional<CompraDireta> compraDiretaOpt = compraDiretaRepository.findById(request.portaria());
+            Optional<CompraDireta> compraDiretaOpt = compraDiretaRepository.findById(request.idCompraDireta());
 
             if (compraDiretaOpt.isPresent()) {
                 // Converter o request em uma entidade

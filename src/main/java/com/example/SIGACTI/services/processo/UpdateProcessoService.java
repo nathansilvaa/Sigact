@@ -22,7 +22,7 @@ public class UpdateProcessoService {
     }
 
     // Método para atualizar um processo
-    public Optional<ProcessoResponse> atualizarProcesso(String idProcesso, ProcessoRequest request) {
+    public Optional<ProcessoResponse> atualizarProcesso(Long idProcesso, ProcessoRequest request) {
         Optional<Processo> processoOpt = processoRepository.findById(idProcesso);
 
         if (processoOpt.isPresent()) {

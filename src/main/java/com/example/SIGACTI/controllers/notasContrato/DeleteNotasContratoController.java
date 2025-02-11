@@ -15,7 +15,7 @@ public class DeleteNotasContratoController {
     }
 
     @DeleteMapping(params = "notaFiscal")
-    public ResponseEntity<String> deletarNotasContrato(@RequestParam String notaFiscal) {
+    public ResponseEntity<String> deletarNotasContrato(@RequestParam Long notaFiscal) {
         boolean deletado = service.deletarNotasContrato(notaFiscal);
 
         if (deletado) {

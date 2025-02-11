@@ -11,7 +11,7 @@ import java.util.List;
 
 public record ContratoRequest(
     String idNumeroContrato,
-    String idProcesso,
+    Long idProcesso,
     Date orcamento,
     int acaoOrcamentaria,
     int fonteRecurso,
@@ -25,16 +25,17 @@ public record ContratoRequest(
     Date dataContrato,
     Date vigenciaInicial,
     Double valorContrato,
-    Double saldo,
     float consumido,
     String situacaoVigencia
 
 
 ){
-    public static Contrato conveterContrato(ContratoRequest request){
+    public static Contrato converterContrato(ContratoRequest request) {
         Contrato contrato = new Contrato();
+
         contrato.setIdContrato(request.idNumeroContrato());
         contrato.setOrcamento(request.orcamento());
+        contrato.setAcaoOrcamentaria(request.acaoOrcamentaria());
         contrato.setFonteRecurso(request.fonteRecurso());
         contrato.setTipoContratacao(request.tipoContratacao());
         contrato.setContratado(request.contratado());
@@ -46,9 +47,10 @@ public record ContratoRequest(
         contrato.setDataContrato(request.dataContrato());
         contrato.setVigenciaInicial(request.vigenciaInicial());
         contrato.setValorContrato(request.valorContrato());
-        contrato.setSaldo(request.saldo());
         contrato.setConsumido(request.consumido());
-        contrato.setSaldo(request.saldo());
+        contrato.setSituacaoVigencia(request.situacaoVigencia());
+
         return contrato;
     }
+
 }

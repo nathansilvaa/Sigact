@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 public record ProcessoResponse(
+        Long id,
         String idNumeroProcesso,
         String unidadeGestora,
         String situacao,
@@ -16,13 +17,13 @@ public record ProcessoResponse(
         Date dataAtuacao,
         String interessados,
         String assunto,
-        String resumoObjeto,
-        List<Contrato>contratos,
-        List<CompraDireta> compraDireta
+        String resumoObjeto
+
 
 ) {
     public static ProcessoResponse conveterProcesso(Processo processo) {
         ProcessoResponse processoResponse = new ProcessoResponse(
+                processo.getId(),
                 processo.getIdProcesso(),
                 processo.getUnidadeGestora(),
                 processo.getSituacao(),
@@ -30,9 +31,8 @@ public record ProcessoResponse(
                 processo.getDataAtuacao(),
                 processo.getInteressados(),
                 processo.getAssunto(),
-                processo.getResumoObjeto(),
-                processo.getContratos(),
-                processo.getComprasDireta()
+                processo.getResumoObjeto()
+
         );
         return processoResponse;
     }

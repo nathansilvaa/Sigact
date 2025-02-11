@@ -21,7 +21,7 @@ public class UpdateCompraDiretaController {
 
     @PutMapping
     public ResponseEntity<CompraDiretaResponse> atualizarCompraDireta(
-            @RequestParam String portaria,
+            @RequestParam Long portaria,
             @RequestBody @Valid CompraDiretaRequest compraDiretaDto) {
 
         Optional<CompraDiretaResponse> compraDiretaAtualizada = service.atualizarCompraDireta(portaria, compraDiretaDto);

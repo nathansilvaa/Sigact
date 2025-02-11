@@ -29,7 +29,7 @@ public class GetCompraDiretaController {
 
     // GET - Buscar compra direta por ID
     @GetMapping
-    public ResponseEntity<CompraDiretaResponse> obterCompraDiretaPorId(@RequestParam String idCompraDireta) {
+    public ResponseEntity<CompraDiretaResponse> obterCompraDiretaPorId(@RequestParam Long idCompraDireta) {
         Optional<CompraDiretaResponse> compraDiretaOpt = getCompraDiretaService.obterCompraDiretaPorId(idCompraDireta);
 
         return compraDiretaOpt

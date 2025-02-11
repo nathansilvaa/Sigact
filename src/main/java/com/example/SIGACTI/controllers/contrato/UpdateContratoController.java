@@ -21,7 +21,7 @@ public class UpdateContratoController {
 
     @PutMapping()
     public ResponseEntity<ContratoResponse> atualizarContrato(
-            @RequestParam String idNumeroContrato,
+            @RequestParam Long idNumeroContrato,
             @RequestBody @Valid ContratoRequest contratoDto) {
 
         Optional<ContratoResponse> contratoAtualizado = service.atualizarContrato(idNumeroContrato, contratoDto);

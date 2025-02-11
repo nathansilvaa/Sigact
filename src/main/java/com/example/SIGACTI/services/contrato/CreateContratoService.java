@@ -14,7 +14,6 @@ import javax.naming.directory.InvalidAttributesException;
 import java.util.Optional;
 
 @Service
-@Transactional
 public class CreateContratoService {
 
     @Autowired
@@ -29,10 +28,10 @@ public class CreateContratoService {
         this.processoRepository = processoRepository;
     }
 
-
+    @Transactional
     public ContratoResponse salvar(ContratoRequest contratoDto) {
         try {
-            Contrato contrato = ContratoRequest.conveterContrato(contratoDto);
+            Contrato contrato = ContratoRequest.converterContrato(contratoDto);
 
 
             Optional<Processo> processo = processoRepository.findById(contratoDto.idProcesso());

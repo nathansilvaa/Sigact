@@ -16,7 +16,7 @@ public class DeleteCompraDiretaService {
     }
 
     @Transactional
-    public boolean deletarCompraDireta(String idCompraDireta) {
+    public boolean deletarCompraDireta(Long idCompraDireta) {
         if (compraDiretaRepository.existsById(idCompraDireta)) {
             compraDiretaRepository.deleteById(idCompraDireta);
             return true;

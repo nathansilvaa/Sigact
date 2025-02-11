@@ -9,7 +9,10 @@ import java.util.Date;
 @Entity
 public class NotasCompraDireta {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @NotBlank
+    @Column(unique = true)
     private String notaFiscal;
     @ManyToOne
     @JoinColumn(name = "portaria", nullable = false)
@@ -42,6 +45,30 @@ public class NotasCompraDireta {
         this.emissao = emissao;
         this.atesto = atesto;
         this.responsavelRecebimento = responsavelRecebimento;
+    }
+
+    public NotasCompraDireta(Long id, String notaFiscal, CompraDireta portaria, String sgd, String processo, String unidade, String objeto, String contratado, String cnpj, Double valorTotal, Date emissao, String atesto, String responsavelRecebimento) {
+        this.id = id;
+        this.notaFiscal = notaFiscal;
+        this.portaria = portaria;
+        this.sgd = sgd;
+        this.processo = processo;
+        this.unidade = unidade;
+        this.objeto = objeto;
+        this.contratado = contratado;
+        this.cnpj = cnpj;
+        this.valorTotal = valorTotal;
+        this.emissao = emissao;
+        this.atesto = atesto;
+        this.responsavelRecebimento = responsavelRecebimento;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public @NotBlank String getNotaFiscal() {
@@ -143,7 +170,8 @@ public class NotasCompraDireta {
     @Override
     public String toString() {
         return "NotasCompraDireta{" +
-                "notaFiscal='" + notaFiscal + '\'' +
+                "id=" + id +
+                ", notaFiscal='" + notaFiscal + '\'' +
                 ", portaria=" + portaria +
                 ", sgd='" + sgd + '\'' +
                 ", processo='" + processo + '\'' +

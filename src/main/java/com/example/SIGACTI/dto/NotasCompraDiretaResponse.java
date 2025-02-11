@@ -6,8 +6,9 @@ import com.example.SIGACTI.model.entities.NotasCompraDireta;
 import java.util.Date;
 
 public record NotasCompraDiretaResponse(
+        Long id,
         String notaFiscal,
-        CompraDireta portaria,
+        CompraDiretaResponse portaria,
         String sgd,
         String processo,
         String unidade,
@@ -21,8 +22,9 @@ public record NotasCompraDiretaResponse(
 ) {
     public static NotasCompraDiretaResponse converterNotasCompraDireta(NotasCompraDireta nota) {
         return new NotasCompraDiretaResponse(
+                nota.getId(),
                 nota.getNotaFiscal(),
-                nota.getPortaria(),
+                CompraDiretaResponse.converterCompraDireta(nota.getPortaria()),
                 nota.getSgd(),
                 nota.getProcesso(),
                 nota.getUnidade(),

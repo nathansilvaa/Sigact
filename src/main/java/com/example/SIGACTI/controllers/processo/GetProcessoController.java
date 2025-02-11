@@ -27,7 +27,7 @@ public class GetProcessoController {
 
     // Endpoint para buscar um processo específico pelo ID
     @GetMapping
-    public ResponseEntity<ProcessoResponse> obterProcessoPorId(@RequestParam String idProcesso) {
+    public ResponseEntity<ProcessoResponse> obterProcessoPorId(@RequestParam Long idProcesso) {
         Optional<ProcessoResponse> processo = service.obterProcessoPorId(idProcesso);
         return processo.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());

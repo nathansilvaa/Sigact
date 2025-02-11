@@ -15,7 +15,7 @@ public class DeleteNotaCompraDiretaController {
     }
 
     @DeleteMapping
-    public ResponseEntity<String> deletarNotaCompraDireta(@RequestParam String notaFiscal) {
+    public ResponseEntity<String> deletarNotaCompraDireta(@RequestParam Long notaFiscal) {
         boolean deletado = service.deletarNotaCompraDireta(notaFiscal);
 
         if (deletado) {

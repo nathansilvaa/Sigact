@@ -7,7 +7,7 @@ import java.util.Date;
 
 public record NotasCompraDiretaRequest(
         String notaFiscal,
-        String portaria, // Referência ao ID da CompraDireta
+        Long idCompraDireta, // Referência ao ID da CompraDireta
         String sgd,
         String processo,
         String unidade,

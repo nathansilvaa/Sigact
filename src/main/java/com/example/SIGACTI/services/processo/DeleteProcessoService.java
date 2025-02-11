@@ -14,7 +14,7 @@ public class DeleteProcessoService {
         this.processoRepository = processoRepository;
     }
 
-    public void deletarProcesso(String idProcesso) {
+    public void deletarProcesso(Long idProcesso) {
         if (processoRepository.existsById(idProcesso)) {
             processoRepository.deleteById(idProcesso);
         } else {

@@ -29,7 +29,7 @@ public class GetProcessoService {
     }
 
     // Método para buscar um processo específico pelo ID
-    public Optional<ProcessoResponse> obterProcessoPorId(String idProcesso) {
+    public Optional<ProcessoResponse> obterProcessoPorId(Long idProcesso) {
         Optional<Processo> processoOpt = processoRepository.findById(idProcesso);
         return processoOpt.map(ProcessoResponse::conveterProcesso);
     }

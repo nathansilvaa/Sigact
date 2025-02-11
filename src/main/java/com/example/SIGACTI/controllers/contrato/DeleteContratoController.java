@@ -4,6 +4,7 @@ import com.example.SIGACTI.model.entities.Contrato;
 import com.example.SIGACTI.model.repositories.ContratoRepository;
 import com.example.SIGACTI.services.contrato.DeleteContratoService;
 import com.example.SIGACTI.services.contrato.GetContratoService;
+import com.mysql.cj.log.Log;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,7 @@ public class DeleteContratoController {
     }
 
     @DeleteMapping(params = "idNumeroContrato")
-    public ResponseEntity<String> deletarContrato(@RequestParam String idNumeroContrato) {
+    public ResponseEntity<String> deletarContrato(@RequestParam Long idNumeroContrato) {
         boolean deletado = service.deletarContrato(idNumeroContrato);
 
         if (deletado) {

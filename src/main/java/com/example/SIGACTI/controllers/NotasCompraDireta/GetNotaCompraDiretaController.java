@@ -29,7 +29,7 @@ public class GetNotaCompraDiretaController {
 
     // GET - Buscar uma nota de compra direta pelo ID (notaFiscal)
     @GetMapping
-    public ResponseEntity<NotasCompraDiretaResponse> obterNotaPorId(@RequestParam String notaFiscal) {
+    public ResponseEntity<NotasCompraDiretaResponse> obterNotaPorId(@RequestParam Long notaFiscal) {
         Optional<NotasCompraDiretaResponse> notaOpt = service.obterNotaPorId(notaFiscal);
 
         return notaOpt

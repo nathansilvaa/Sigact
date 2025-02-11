@@ -15,7 +15,7 @@ public class DeleteProcessoController {
     }
 
     @DeleteMapping("/{idProcesso}")
-    public ResponseEntity<String> deletarProcesso(@PathVariable String idProcesso) {
+    public ResponseEntity<String> deletarProcesso(@PathVariable Long idProcesso) {
         try {
             deleteProcessoService.deletarProcesso(idProcesso);
             return ResponseEntity.ok("Processo deletado com sucesso.");
