@@ -2,20 +2,14 @@ package com.example.SIGACTI.dto;
 
 import com.example.SIGACTI.model.entities.Contrato;
 import com.example.SIGACTI.model.entities.NotasContrato;
-import com.example.SIGACTI.model.entities.Processo;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 
 import java.util.Date;
 import java.util.List;
 
 
-public record ContratoResponse(
+public record ProcessoContratoResponse(
         Long id,
     String idNumeroContrato,
-    ProcessoResponse processo,
     Date orcamento,
     int acaoOrcamentaria,
     int fonteRecurso,
@@ -37,11 +31,10 @@ public record ContratoResponse(
 
 
 ){
-    public static ContratoResponse conveterContrato(Contrato contrato){
-        ContratoResponse contratoResponse = new ContratoResponse(
+    public static ProcessoContratoResponse conveterContrato(Contrato contrato){
+        ProcessoContratoResponse contratoResponse = new ProcessoContratoResponse(
                 contrato.getId(),
                 contrato.getIdContrato(),
-                ProcessoResponse.conveterProcesso(contrato.getProcesso()),
                 contrato.getOrcamento(),
                 contrato.getAcaoOrcamentaria(),
                 contrato.getFonteRecurso(),

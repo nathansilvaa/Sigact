@@ -19,7 +19,6 @@ public class NotasCompraDireta {
     @JsonIgnore
     private CompraDireta portaria;
     private String sgd;
-    private String processo;
     private String unidade;
     private String objeto;
     private String contratado;
@@ -32,27 +31,13 @@ public class NotasCompraDireta {
     public NotasCompraDireta() {
 
     }
-    public NotasCompraDireta(String notaFiscal, CompraDireta portaria, String sgd, String processo, String unidade, String objeto, String contratado, String cnpj, Double valorTotal, Date emissao, String atesto, String responsavelRecebimento) {
-        this.notaFiscal = notaFiscal;
-        this.portaria = portaria;
-        this.sgd = sgd;
-        this.processo = processo;
-        this.unidade = unidade;
-        this.objeto = objeto;
-        this.contratado = contratado;
-        this.cnpj = cnpj;
-        this.valorTotal = valorTotal;
-        this.emissao = emissao;
-        this.atesto = atesto;
-        this.responsavelRecebimento = responsavelRecebimento;
-    }
+
 
     public NotasCompraDireta(Long id, String notaFiscal, CompraDireta portaria, String sgd, String processo, String unidade, String objeto, String contratado, String cnpj, Double valorTotal, Date emissao, String atesto, String responsavelRecebimento) {
         this.id = id;
         this.notaFiscal = notaFiscal;
         this.portaria = portaria;
         this.sgd = sgd;
-        this.processo = processo;
         this.unidade = unidade;
         this.objeto = objeto;
         this.contratado = contratado;
@@ -93,14 +78,6 @@ public class NotasCompraDireta {
 
     public void setSgd(String sgd) {
         this.sgd = sgd;
-    }
-
-    public String getProcesso() {
-        return processo;
-    }
-
-    public void setProcesso(String processo) {
-        this.processo = processo;
     }
 
     public String getUnidade() {
@@ -174,7 +151,6 @@ public class NotasCompraDireta {
                 ", notaFiscal='" + notaFiscal + '\'' +
                 ", portaria=" + portaria +
                 ", sgd='" + sgd + '\'' +
-                ", processo='" + processo + '\'' +
                 ", unidade='" + unidade + '\'' +
                 ", objeto='" + objeto + '\'' +
                 ", contratado='" + contratado + '\'' +

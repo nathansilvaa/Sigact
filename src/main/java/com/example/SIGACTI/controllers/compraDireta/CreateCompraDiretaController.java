@@ -25,10 +25,6 @@ public class CreateCompraDiretaController {
         // Converter DTO para Entidade e salvar
         CompraDiretaResponse compraDireta = service.salvar(compraDiretaRequest);
 
-        if (compraDireta != null) {
-            return ResponseEntity.ok(compraDireta);
-        } else {
-            return ResponseEntity.badRequest().build();
-        }
+        return ResponseEntity.ok(compraDireta);
     }
 }

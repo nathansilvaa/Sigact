@@ -21,6 +21,8 @@ public record CompraDiretaResponse(
         Date vigencia,
         Double valorContrato,
         Double saldo,
+        Double saldoRestanteCompraDireta,
+        Long percentualConsumido,
         String situacaoVigencia,
         double consumido
 ) {
@@ -41,6 +43,8 @@ public record CompraDiretaResponse(
                 compraDireta.getVigencia(),
                 compraDireta.getValorContrato(),
                 compraDireta.getSaldo(),
+                compraDireta.getSaldoRestanteCompraDireta(),
+                compraDireta.getPercentualConsumido(),
                 compraDireta.getSituacaoVigencia(),
                 compraDireta.getConsumido()
         );

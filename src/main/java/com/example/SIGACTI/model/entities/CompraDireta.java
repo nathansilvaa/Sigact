@@ -36,6 +36,18 @@ public class CompraDireta {
     @OneToMany(mappedBy = "portaria", cascade = CascadeType.ALL)
     private List<NotasCompraDireta> notasCompraDiretas = new ArrayList<>();
 
+    public Double getSaldoRestanteCompraDireta() {
+        final Double valorNotas = this.getNotasCompraDiretas().stream().map(NotasCompraDireta::getValorTotal).reduce(0.0, Double::sum);
+        return this.valorContrato - valorNotas;
+    }
+
+
+    public long getPercentualConsumido(){
+        final Double  percentRestante =  (100 - ((getSaldoRestanteCompraDireta() / (this.valorContrato) * 100)));
+        final Long percentArredondado = Math.round(percentRestante);
+        return percentArredondado;
+    };
+
     public CompraDireta(Long id, String portaria, Processo processo, String resumoObjeto, String interessado, String sgd, String objeto, String statusContrato, String funLegal, String naturezaServico, Date dataContrato, Integer prazoContrato, Date vigencia, Double valorContrato, Double saldo, String situacaoVigencia, double consumido, List<NotasCompraDireta> notasCompraDiretas) {
         this.id = id;
         this.portaria = portaria;

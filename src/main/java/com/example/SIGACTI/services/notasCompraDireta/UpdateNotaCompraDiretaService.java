@@ -33,7 +33,6 @@ public class UpdateNotaCompraDiretaService {
 
             // Atualizando os campos da nota de compra direta
             nota.setSgd(request.sgd());
-            nota.setProcesso(request.processo());
             nota.setUnidade(request.unidade());
             nota.setObjeto(request.objeto());
             nota.setContratado(request.contratado());

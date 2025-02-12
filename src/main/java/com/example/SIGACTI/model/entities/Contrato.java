@@ -1,13 +1,10 @@
 package com.example.SIGACTI.model.entities;
-
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -106,7 +103,13 @@ public class Contrato {
     public Double getSaldoRestanteContrato() {
         final Double valorNotas = this.getNotasContrato().stream().map(NotasContrato::getValorContrato).reduce(0.0, Double::sum);
         return this.valorContrato - valorNotas;
-    }
+    };
+
+    public long getPercentualConsumido(){
+        final Double  percentRestante =  (100 - ((getSaldoRestanteContrato() / (this.valorContrato) * 100)));
+        final Long percentArredondado = Math.round(percentRestante);
+        return percentArredondado;
+    };
 
     public Long getId() {
         return id;

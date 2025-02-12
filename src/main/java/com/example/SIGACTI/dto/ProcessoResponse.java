@@ -17,8 +17,8 @@ public record ProcessoResponse(
         Date dataAtuacao,
         String interessados,
         String assunto,
-        String resumoObjeto
-
+        String resumoObjeto,
+        List<ProcessoContratoResponse> contratos
 
 ) {
     public static ProcessoResponse conveterProcesso(Processo processo) {
@@ -31,7 +31,8 @@ public record ProcessoResponse(
                 processo.getDataAtuacao(),
                 processo.getInteressados(),
                 processo.getAssunto(),
-                processo.getResumoObjeto()
+                processo.getResumoObjeto(),
+                processo.getContratos().stream().map(ProcessoContratoResponse::conveterContrato).toList()
 
         );
         return processoResponse;

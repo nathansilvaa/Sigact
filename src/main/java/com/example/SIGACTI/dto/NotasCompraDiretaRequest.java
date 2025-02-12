@@ -9,7 +9,6 @@ public record NotasCompraDiretaRequest(
         String notaFiscal,
         Long idCompraDireta, // Referência ao ID da CompraDireta
         String sgd,
-        String processo,
         String unidade,
         String objeto,
         String contratado,
@@ -24,7 +23,6 @@ public record NotasCompraDiretaRequest(
         nota.setNotaFiscal(request.notaFiscal());
         nota.setPortaria(compraDireta); // Associando a compra direta
         nota.setSgd(request.sgd());
-        nota.setProcesso(request.processo());
         nota.setUnidade(request.unidade());
         nota.setObjeto(request.objeto());
         nota.setContratado(request.contratado());
