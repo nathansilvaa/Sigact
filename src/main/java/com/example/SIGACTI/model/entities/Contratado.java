@@ -8,7 +8,7 @@ public class Contratado {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true, nullable = false)
-    private String cpf_ou_cnpj;
+    private String cpfOuCnpj;
 
     private String nomeRazaoSocial;
     private String email;
@@ -18,9 +18,9 @@ public class Contratado {
     private Contrato contrato;
 
     public Contratado() {}
-    public Contratado(Long id, String cpf_ou_cnpj, String nomeRazaoSocial, String email) {
+    public Contratado(Long id, String cpfOuCnpj, String nomeRazaoSocial, String email) {
         this.id = id;
-        this.cpf_ou_cnpj = cpf_ou_cnpj;
+        this.cpfOuCnpj = cpfOuCnpj;
         this.nomeRazaoSocial = nomeRazaoSocial;
         this.email = email;
     }
