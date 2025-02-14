@@ -50,6 +50,16 @@ public class Contrato {
     public Contrato(){
 
     }
+    public Double getSaldoRestanteContrato() {
+        final Double valorNotas = this.getNotasContrato().stream().map(NotasContrato::getValorContrato).reduce(0.0, Double::sum);
+        return this.valorContrato - valorNotas;
+    };
+
+    public long getPercentualConsumido(){
+        final Double  percentRestante =  (100 - ((getSaldoRestanteContrato() / (this.valorContrato) * 100)));
+        final Long percentArredondado = Math.round(percentRestante);
+        return percentArredondado;
+    };
 
     public Contrato(Long id, String idContrato, List<NotasContrato> notasContrato, Processo processo, Date orcamento, AcaoOrcamentaria acaoOrcamentaria, int fonteRecurso, String tipoContratacao, String contratado, int numeroAltomatico, String objeto, String statusContrato, String funLegal, String naturezaServico, Date dataContrato, Date vigenciaInicial, Double valorContrato, float consumido, String situacaoVigencia) {
         this.id = id;
