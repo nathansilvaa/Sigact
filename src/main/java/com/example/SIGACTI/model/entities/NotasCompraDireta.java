@@ -2,6 +2,7 @@
 package com.example.SIGACTI.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
@@ -14,9 +15,9 @@ public class NotasCompraDireta {
     @NotBlank
     @Column(unique = true)
     private String notaFiscal;
-    @ManyToOne
-    @JoinColumn(name = "portaria", nullable = false)
-    @JsonIgnore
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "compra_direta_id", nullable = false)
+    @JsonIgnoreProperties("notasCompraDiretas") // Evita recursão infinita
     private CompraDireta portaria;
     private String sgd;
     private String unidade;

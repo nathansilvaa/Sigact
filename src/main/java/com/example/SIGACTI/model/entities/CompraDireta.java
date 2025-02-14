@@ -1,6 +1,8 @@
 package com.example.SIGACTI.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import java.util.ArrayList;
@@ -16,8 +18,8 @@ public class CompraDireta {
     private String portaria;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "processo", nullable = false, unique = true)
-    @JsonBackReference
+    @JoinColumn(name = "processo_id", nullable = false) // Sem `unique = true`!
+    @JsonIgnoreProperties("comprasDireta") // Evita recursão infinita
     private Processo processo;
     private String resumoObjeto;
     private String interessado;
@@ -33,7 +35,8 @@ public class CompraDireta {
     private Double saldo;
     private String situacaoVigencia;
     private double consumido;
-    @OneToMany(mappedBy = "portaria", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "portaria", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("portaria") // Evita loop na serialização
     private List<NotasCompraDireta> notasCompraDiretas = new ArrayList<>();
 
     public Double getSaldoRestanteCompraDireta() {
@@ -76,6 +79,7 @@ public class CompraDireta {
     public List<NotasCompraDireta> getNotasCompraDiretas() {
         return notasCompraDiretas;
     }
+
 
     public void setNotasCompraDiretas(List<NotasCompraDireta> notasCompraDiretas) {
         this.notasCompraDiretas = notasCompraDiretas;

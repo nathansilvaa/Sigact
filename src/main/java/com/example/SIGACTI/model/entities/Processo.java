@@ -32,7 +32,7 @@ public class Processo {
     private List<Contrato> contratos = new ArrayList<>();
 
     @OneToMany(mappedBy = "processo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonManagedReference
+    @JsonIgnoreProperties("processo")
     private List<CompraDireta> comprasDireta = new ArrayList<>();
 
     public Processo(){

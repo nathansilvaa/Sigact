@@ -29,7 +29,6 @@ public record ProcessoContratoResponse(
     String situacaoVigencia,
     List<NotasContrato> notasContrato
 
-
 ){
     public static ProcessoContratoResponse conveterContrato(Contrato contrato){
         ProcessoContratoResponse contratoResponse = new ProcessoContratoResponse(

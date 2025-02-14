@@ -8,7 +8,6 @@ import java.util.Date;
 public record NotasCompraDiretaResponse(
         Long id,
         String notaFiscal,
-        CompraDiretaResponse portaria,
         String sgd,
         String unidade,
         String objeto,
@@ -23,7 +22,6 @@ public record NotasCompraDiretaResponse(
         return new NotasCompraDiretaResponse(
                 nota.getId(),
                 nota.getNotaFiscal(),
-                CompraDiretaResponse.converterCompraDireta(nota.getPortaria()),
                 nota.getSgd(),
                 nota.getUnidade(),
                 nota.getObjeto(),
