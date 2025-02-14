@@ -4,36 +4,39 @@ import com.example.SIGACTI.dto.ContratoRequest;
 import com.example.SIGACTI.dto.ContratoResponse;
 import com.example.SIGACTI.model.entities.Contrato;
 import com.example.SIGACTI.model.entities.Processo;
+import com.example.SIGACTI.model.repositories.AcaoOrcamentariaRepository;
 import com.example.SIGACTI.model.repositories.ContratoRepository;
 import com.example.SIGACTI.model.repositories.ProcessoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @Service
-@Transactional
 public class UpdateContratoService {
 
-    private final ContratoRepository contratoRepository;
-    private final ProcessoRepository processoRepository;
+    private  ContratoRepository contratoRepository;
+    private  ProcessoRepository processoRepository;
+    private  AcaoOrcamentariaRepository acaoOrcamentariaRepository;
 
     @Autowired
-    public UpdateContratoService(ContratoRepository contratoRepository, ProcessoRepository processoRepository) {
+    public UpdateContratoService(ContratoRepository contratoRepository, ProcessoRepository processoRepository, AcaoOrcamentariaRepository acaoOrcamentariaRepository) {
         this.contratoRepository = contratoRepository;
         this.processoRepository = processoRepository;
+        this.acaoOrcamentariaRepository = acaoOrcamentariaRepository;
     }
+
 
     public Optional<ContratoResponse> atualizarContrato(Long idContrato, ContratoRequest contratoDto) {
         Optional<Contrato> contratoOpt = contratoRepository.findById(idContrato);
 
+        var acao = acaoOrcamentariaRepository.findById(contratoDto.acaoOrcamentaria()).orElse(null);
+
         if (contratoOpt.isPresent()) {
             Contrato contrato = contratoOpt.get();
 
-            // Atualizando os campos do contrato
             contrato.setOrcamento(contratoDto.orcamento());
-            contrato.setAcaoOrcamentaria(contratoDto.acaoOrcamentaria());
+            contrato.setAcaoOrcamentaria(acao);
             contrato.setFonteRecurso(contratoDto.fonteRecurso());
             contrato.setTipoContratacao(contratoDto.tipoContratacao());
             contrato.setContratado(contratoDto.contratado());
@@ -48,7 +51,6 @@ public class UpdateContratoService {
             contrato.setConsumido(contratoDto.consumido());
             contrato.setSituacaoVigencia(contratoDto.situacaoVigencia());
 
-            // Atualiza o processo, se necessário
             if (contratoDto.idProcesso() != null) {
                 Optional<Processo> processoOpt = processoRepository.findById(contratoDto.idProcesso());
                 processoOpt.ifPresent(contrato::setProcesso);
@@ -58,7 +60,7 @@ public class UpdateContratoService {
 
             return Optional.of(ContratoResponse.conveterContrato(contrato));
         } else {
-            return Optional.empty(); // Retorna vazio caso o contrato não seja encontrado
+            return Optional.empty();
         }
     }
 }

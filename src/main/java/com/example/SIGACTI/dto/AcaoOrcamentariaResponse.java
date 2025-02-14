@@ -15,6 +15,7 @@ public record AcaoOrcamentariaResponse(
                 acaoOrcamentaria.getId(),
                 acaoOrcamentaria.getAno(),
                 acaoOrcamentaria.getUnidadeGestora(),
+                acaoOrcamentaria.getAcaoOrcamentaria(),
                 acaoOrcamentaria.getFonteRecurso(),
                 acaoOrcamentaria.getValor()
         );
