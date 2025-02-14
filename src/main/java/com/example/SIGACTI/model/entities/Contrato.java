@@ -28,48 +28,21 @@ public class Contrato {
     @JoinColumn(name = "processo", nullable = false)
     @JsonManagedReference
     private Processo processo;
-
-    @NotNull
     private Date orcamento;
-
-    @NotNull
-    private int acaoOrcamentaria;
-
-    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "acao_orcamentaria_id", nullable = false) // Chave estrangeira
+    private AcaoOrcamentaria acaoOrcamentaria;
     private int fonteRecurso;
-
-    @NotBlank
     private String tipoContratacao;
-
-    @NotBlank
     private String contratado;
-
-    @NotNull
     private int numeroAltomatico;
-
-    @NotBlank
     private String objeto;
-
-    @NotBlank
     private String statusContrato;
-
-    @NotBlank
     private String funLegal;
-
-    @NotBlank
     private String naturezaServico;
-
-    @NotNull
     private Date dataContrato;
-
-    @NotNull
     private Date vigenciaInicial;
-
-    @NotNull
-    @Min(0) // Valida que o valor seja maior ou igual a 0
     private Double valorContrato;
-
-    @Column(nullable = false, columnDefinition = "float default 0")
     private float consumido = 0;
 
     private String situacaoVigencia;
@@ -77,8 +50,18 @@ public class Contrato {
     public Contrato(){
 
     }
+    public Double getSaldoRestanteContrato() {
+        final Double valorNotas = this.getNotasContrato().stream().map(NotasContrato::getValorContrato).reduce(0.0, Double::sum);
+        return this.valorContrato - valorNotas;
+    };
 
-    public Contrato(Long id, String idContrato, List<NotasContrato> notasContrato, Processo processo, Date orcamento, int acaoOrcamentaria, int fonteRecurso, String tipoContratacao, String contratado, int numeroAltomatico, String objeto, String statusContrato, String funLegal, String naturezaServico, Date dataContrato, Date vigenciaInicial, Double valorContrato, float consumido, String situacaoVigencia) {
+    public long getPercentualConsumido(){
+        final Double  percentRestante =  (100 - ((getSaldoRestanteContrato() / (this.valorContrato) * 100)));
+        final Long percentArredondado = Math.round(percentRestante);
+        return percentArredondado;
+    };
+
+    public Contrato(Long id, String idContrato, List<NotasContrato> notasContrato, Processo processo, Date orcamento, AcaoOrcamentaria acaoOrcamentaria, int fonteRecurso, String tipoContratacao, String contratado, int numeroAltomatico, String objeto, String statusContrato, String funLegal, String naturezaServico, Date dataContrato, Date vigenciaInicial, Double valorContrato, float consumido, String situacaoVigencia) {
         this.id = id;
         this.idContrato = idContrato;
         this.notasContrato = notasContrato;
@@ -100,16 +83,30 @@ public class Contrato {
         this.situacaoVigencia = situacaoVigencia;
     }
 
-    public Double getSaldoRestanteContrato() {
-        final Double valorNotas = this.getNotasContrato().stream().map(NotasContrato::getValorContrato).reduce(0.0, Double::sum);
-        return this.valorContrato - valorNotas;
-    };
-
-    public long getPercentualConsumido(){
-        final Double  percentRestante =  (100 - ((getSaldoRestanteContrato() / (this.valorContrato) * 100)));
-        final Long percentArredondado = Math.round(percentRestante);
-        return percentArredondado;
-    };
+    @Override
+    public String toString() {
+        return "Contrato{" +
+                "id=" + id +
+                ", idContrato='" + idContrato + '\'' +
+                ", notasContrato=" + notasContrato +
+                ", processo=" + processo +
+                ", orcamento=" + orcamento +
+                ", acaoOrcamentaria=" + acaoOrcamentaria +
+                ", fonteRecurso=" + fonteRecurso +
+                ", tipoContratacao='" + tipoContratacao + '\'' +
+                ", contratado='" + contratado + '\'' +
+                ", numeroAltomatico=" + numeroAltomatico +
+                ", objeto='" + objeto + '\'' +
+                ", statusContrato='" + statusContrato + '\'' +
+                ", funLegal='" + funLegal + '\'' +
+                ", naturezaServico='" + naturezaServico + '\'' +
+                ", dataContrato=" + dataContrato +
+                ", vigenciaInicial=" + vigenciaInicial +
+                ", valorContrato=" + valorContrato +
+                ", consumido=" + consumido +
+                ", situacaoVigencia='" + situacaoVigencia + '\'' +
+                '}';
+    }
 
     public Long getId() {
         return id;
@@ -143,110 +140,107 @@ public class Contrato {
         this.processo = processo;
     }
 
-    public @NotNull Date getOrcamento() {
+    public Date getOrcamento() {
         return orcamento;
     }
 
-    public void setOrcamento(@NotNull Date orcamento) {
+    public void setOrcamento(Date orcamento) {
         this.orcamento = orcamento;
     }
 
-    @NotNull
-    public int getAcaoOrcamentaria() {
+    public AcaoOrcamentaria getAcaoOrcamentaria() {
         return acaoOrcamentaria;
     }
 
-    public void setAcaoOrcamentaria(@NotNull int acaoOrcamentaria) {
+    public void setAcaoOrcamentaria(AcaoOrcamentaria acaoOrcamentaria) {
         this.acaoOrcamentaria = acaoOrcamentaria;
     }
 
-    @NotNull
     public int getFonteRecurso() {
         return fonteRecurso;
     }
 
-    public void setFonteRecurso(@NotNull int fonteRecurso) {
+    public void setFonteRecurso(int fonteRecurso) {
         this.fonteRecurso = fonteRecurso;
     }
 
-    public @NotBlank String getTipoContratacao() {
+    public String getTipoContratacao() {
         return tipoContratacao;
     }
 
-    public void setTipoContratacao(@NotBlank String tipoContratacao) {
+    public void setTipoContratacao(String tipoContratacao) {
         this.tipoContratacao = tipoContratacao;
     }
 
-    public @NotBlank String getContratado() {
+    public String getContratado() {
         return contratado;
     }
 
-    public void setContratado(@NotBlank String contratado) {
+    public void setContratado(String contratado) {
         this.contratado = contratado;
     }
 
-    @NotNull
     public int getNumeroAltomatico() {
         return numeroAltomatico;
     }
 
-    public void setNumeroAltomatico(@NotNull int numeroAltomatico) {
+    public void setNumeroAltomatico(int numeroAltomatico) {
         this.numeroAltomatico = numeroAltomatico;
     }
 
-    public @NotBlank String getObjeto() {
+    public String getObjeto() {
         return objeto;
     }
 
-    public void setObjeto(@NotBlank String objeto) {
+    public void setObjeto(String objeto) {
         this.objeto = objeto;
     }
 
-    public @NotBlank String getStatusContrato() {
+    public String getStatusContrato() {
         return statusContrato;
     }
 
-    public void setStatusContrato(@NotBlank String statusContrato) {
+    public void setStatusContrato(String statusContrato) {
         this.statusContrato = statusContrato;
     }
 
-    public @NotBlank String getFunLegal() {
+    public String getFunLegal() {
         return funLegal;
     }
 
-    public void setFunLegal(@NotBlank String funLegal) {
+    public void setFunLegal(String funLegal) {
         this.funLegal = funLegal;
     }
 
-    public @NotBlank String getNaturezaServico() {
+    public String getNaturezaServico() {
         return naturezaServico;
     }
 
-    public void setNaturezaServico(@NotBlank String naturezaServico) {
+    public void setNaturezaServico(String naturezaServico) {
         this.naturezaServico = naturezaServico;
     }
 
-    public @NotNull Date getDataContrato() {
+    public Date getDataContrato() {
         return dataContrato;
     }
 
-    public void setDataContrato(@NotNull Date dataContrato) {
+    public void setDataContrato(Date dataContrato) {
         this.dataContrato = dataContrato;
     }
 
-    public @NotNull Date getVigenciaInicial() {
+    public Date getVigenciaInicial() {
         return vigenciaInicial;
     }
 
-    public void setVigenciaInicial(@NotNull Date vigenciaInicial) {
+    public void setVigenciaInicial(Date vigenciaInicial) {
         this.vigenciaInicial = vigenciaInicial;
     }
 
-    public @NotNull @Min(0) Double getValorContrato() {
+    public Double getValorContrato() {
         return valorContrato;
     }
 
-    public void setValorContrato(@NotNull @Min(0) Double valorContrato) {
+    public void setValorContrato(Double valorContrato) {
         this.valorContrato = valorContrato;
     }
 
@@ -265,31 +259,4 @@ public class Contrato {
     public void setSituacaoVigencia(String situacaoVigencia) {
         this.situacaoVigencia = situacaoVigencia;
     }
-
-    @Override
-    public String toString() {
-        return "Contrato{" +
-                "id=" + id +
-                ", idContrato='" + idContrato + '\'' +
-                ", notasContrato=" + notasContrato +
-                ", processo=" + processo +
-                ", orcamento=" + orcamento +
-                ", acaoOrcamentaria=" + acaoOrcamentaria +
-                ", fonteRecurso=" + fonteRecurso +
-                ", tipoContratacao='" + tipoContratacao + '\'' +
-                ", contratado='" + contratado + '\'' +
-                ", numeroAltomatico=" + numeroAltomatico +
-                ", objeto='" + objeto + '\'' +
-                ", statusContrato='" + statusContrato + '\'' +
-                ", funLegal='" + funLegal + '\'' +
-                ", naturezaServico='" + naturezaServico + '\'' +
-                ", dataContrato=" + dataContrato +
-                ", vigenciaInicial=" + vigenciaInicial +
-                ", valorContrato=" + valorContrato +
-                ", consumido=" + consumido +
-                ", situacaoVigencia='" + situacaoVigencia + '\'' +
-                '}';
-    }
-
-
 }

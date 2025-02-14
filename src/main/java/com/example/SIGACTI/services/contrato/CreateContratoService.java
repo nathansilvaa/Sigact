@@ -2,8 +2,10 @@ package com.example.SIGACTI.services.contrato;
 
 import com.example.SIGACTI.dto.ContratoRequest;
 import com.example.SIGACTI.dto.ContratoResponse;
+import com.example.SIGACTI.model.entities.AcaoOrcamentaria;
 import com.example.SIGACTI.model.entities.Contrato;
 import com.example.SIGACTI.model.entities.Processo;
+import com.example.SIGACTI.model.repositories.AcaoOrcamentariaRepository;
 import com.example.SIGACTI.model.repositories.ContratoRepository;
 import com.example.SIGACTI.model.repositories.ProcessoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ public class CreateContratoService {
     @Autowired
     private final ProcessoRepository processoRepository;
 
+    @Autowired
+    private AcaoOrcamentariaRepository acaoOrcamentariaRepository;
+
 
 
     public CreateContratoService(ContratoRepository contratoRepository, ProcessoRepository processoRepository) {
@@ -30,8 +35,10 @@ public class CreateContratoService {
 
     @Transactional
     public ContratoResponse salvar(ContratoRequest contratoDto) {
+
+        AcaoOrcamentaria encontrada = acaoOrcamentariaRepository.findById(contratoDto.acaoOrcamentaria()).orElseThrow(() -> new RuntimeException("Acao nao encontrada"));
         try {
-            Contrato contrato = ContratoRequest.converterContrato(contratoDto);
+            Contrato contrato = ContratoRequest.converterContrato(contratoDto,encontrada);
 
 
             Optional<Processo> processo = processoRepository.findById(contratoDto.idProcesso());
