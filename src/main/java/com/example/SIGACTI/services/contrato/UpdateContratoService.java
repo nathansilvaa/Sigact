@@ -39,7 +39,6 @@ public class UpdateContratoService {
             contrato.setAcaoOrcamentaria(acao);
             contrato.setFonteRecurso(contratoDto.fonteRecurso());
             contrato.setTipoContratacao(contratoDto.tipoContratacao());
-            contrato.setContratado(contratoDto.contratado());
             contrato.setNumeroAltomatico(contratoDto.numeroAltomatico());
             contrato.setObjeto(contratoDto.objeto());
             contrato.setStatusContrato(contratoDto.statusContrato());

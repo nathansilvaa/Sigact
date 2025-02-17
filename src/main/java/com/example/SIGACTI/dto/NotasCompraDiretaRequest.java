@@ -20,6 +20,7 @@ public record NotasCompraDiretaRequest(
 ) {
     public static NotasCompraDireta converterNotasCompraDireta(NotasCompraDiretaRequest request, CompraDireta compraDireta) {
         NotasCompraDireta nota = new NotasCompraDireta();
+
         nota.setNotaFiscal(request.notaFiscal());
         nota.setPortaria(compraDireta); // Associando a compra direta
         nota.setSgd(request.sgd());
@@ -31,6 +32,7 @@ public record NotasCompraDiretaRequest(
         nota.setEmissao(request.emissao());
         nota.setAtesto(request.atesto());
         nota.setResponsavelRecebimento(request.responsavelRecebimento());
+
         return nota;
     }
 }

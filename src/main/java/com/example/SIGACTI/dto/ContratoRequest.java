@@ -1,9 +1,6 @@
 package com.example.SIGACTI.dto;
 
-import com.example.SIGACTI.model.entities.AcaoOrcamentaria;
-import com.example.SIGACTI.model.entities.Contrato;
-import com.example.SIGACTI.model.entities.NotasContrato;
-import com.example.SIGACTI.model.entities.Processo;
+import com.example.SIGACTI.model.entities.*;
 
 import java.sql.Date;
 import java.util.List;
@@ -17,7 +14,7 @@ public record ContratoRequest(
     Long acaoOrcamentaria,
     int fonteRecurso,
     String tipoContratacao,
-    String contratado,
+    Long contratado,
     int numeroAltomatico,
     String objeto,
     String statusContrato,
@@ -39,7 +36,6 @@ public record ContratoRequest(
         contrato.setAcaoOrcamentaria(acao);
         contrato.setFonteRecurso(request.fonteRecurso());
         contrato.setTipoContratacao(request.tipoContratacao());
-        contrato.setContratado(request.contratado());
         contrato.setNumeroAltomatico(request.numeroAltomatico());
         contrato.setObjeto(request.objeto());
         contrato.setStatusContrato(request.statusContrato());
