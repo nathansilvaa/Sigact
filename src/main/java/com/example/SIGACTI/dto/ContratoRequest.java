@@ -28,7 +28,7 @@ public record ContratoRequest(
 
 
 ){
-    public static Contrato converterContrato(ContratoRequest request, AcaoOrcamentaria acao) {
+    public static Contrato converterContrato(ContratoRequest request, AcaoOrcamentaria acao, Contratado contratado) {
         Contrato contrato = new Contrato();
 
         contrato.setIdContrato(request.idNumeroContrato());
@@ -37,6 +37,7 @@ public record ContratoRequest(
         contrato.setFonteRecurso(request.fonteRecurso());
         contrato.setTipoContratacao(request.tipoContratacao());
         contrato.setNumeroAltomatico(request.numeroAltomatico());
+        contrato.setContratado(contratado);
         contrato.setObjeto(request.objeto());
         contrato.setStatusContrato(request.statusContrato());
         contrato.setFunLegal(request.funLegal());
