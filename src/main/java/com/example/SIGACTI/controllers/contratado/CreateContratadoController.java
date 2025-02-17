@@ -2,8 +2,6 @@ package com.example.SIGACTI.controllers.contratado;
 
 import com.example.SIGACTI.dto.*;
 import com.example.SIGACTI.services.contratado.CreateContratadoService;
-import com.example.SIGACTI.services.contrato.CreateContratoService;
-import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
