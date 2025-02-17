@@ -1,7 +1,6 @@
 package com.example.SIGACTI.dto;
 
 import com.example.SIGACTI.model.entities.Contratado;
-import com.example.SIGACTI.model.entities.Contrato;
 
 public record ContratadoRequest(
         Long id,

@@ -3,9 +3,6 @@ package com.example.SIGACTI.dto;
 import com.example.SIGACTI.model.entities.*;
 
 import java.sql.Date;
-import java.util.List;
-
-
 
 public record ContratoRequest(
     String idNumeroContrato,
