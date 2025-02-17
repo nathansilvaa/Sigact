@@ -34,8 +34,6 @@ public record ContratoResponse(
     float consumido,
     String situacaoVigencia,
     List<NotasContrato> notasContrato
-
-
 ){
     public static ContratoResponse conveterContrato(Contrato contrato){
         ContratoResponse contratoResponse = new ContratoResponse(
