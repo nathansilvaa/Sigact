@@ -48,7 +48,6 @@ public record ContratoRequest(
         contrato.setDataContrato(request.dataContrato());
         contrato.setVigenciaInicial(request.vigenciaInicial());
         contrato.setValorContrato(request.valorContrato());
-        contrato.setConsumido(request.consumido());
         contrato.setSituacaoVigencia(request.situacaoVigencia());
 
         return contrato;

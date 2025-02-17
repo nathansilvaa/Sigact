@@ -31,7 +31,6 @@ public record ContratoResponse(
     Double valorContrato,
     Double saldo,
     long PercentualConsumido,
-    float consumido,
     String situacaoVigencia,
     List<NotasContrato> notasContrato
 ){
@@ -55,7 +54,6 @@ public record ContratoResponse(
                 contrato.getValorContrato(),
                 contrato.getSaldoRestanteContrato(),
                 contrato.getPercentualConsumido(),
-                contrato.getConsumido(),
                 contrato.getSituacaoVigencia(),
                 contrato.getNotasContrato()
 

@@ -23,5 +23,4 @@ public class UpdateAcaoController {
         Optional<AcaoOrcamentariaResponse> acaoAtualizada = updateAcaoService.atualizarAcao(id, request);
         return acaoAtualizada.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
-
 }

@@ -43,7 +43,7 @@ public class Contrato {
     private Date dataContrato;
     private Date vigenciaInicial;
     private Double valorContrato;
-    private float consumido = 0;
+
 
     private String situacaoVigencia;
 
@@ -61,7 +61,7 @@ public class Contrato {
         return percentArredondado;
     };
 
-    public Contrato(Long id, String idContrato, List<NotasContrato> notasContrato, Processo processo, Date orcamento, AcaoOrcamentaria acaoOrcamentaria, int fonteRecurso, String tipoContratacao, String contratado, int numeroAltomatico, String objeto, String statusContrato, String funLegal, String naturezaServico, Date dataContrato, Date vigenciaInicial, Double valorContrato, float consumido, String situacaoVigencia) {
+    public Contrato(Long id, String idContrato, List<NotasContrato> notasContrato, Processo processo, Date orcamento, AcaoOrcamentaria acaoOrcamentaria, int fonteRecurso, String tipoContratacao, String contratado, int numeroAltomatico, String objeto, String statusContrato, String funLegal, String naturezaServico, Date dataContrato, Date vigenciaInicial, Double valorContrato, String situacaoVigencia) {
         this.id = id;
         this.idContrato = idContrato;
         this.notasContrato = notasContrato;
@@ -79,7 +79,6 @@ public class Contrato {
         this.dataContrato = dataContrato;
         this.vigenciaInicial = vigenciaInicial;
         this.valorContrato = valorContrato;
-        this.consumido = consumido;
         this.situacaoVigencia = situacaoVigencia;
     }
 
@@ -103,7 +102,6 @@ public class Contrato {
                 ", dataContrato=" + dataContrato +
                 ", vigenciaInicial=" + vigenciaInicial +
                 ", valorContrato=" + valorContrato +
-                ", consumido=" + consumido +
                 ", situacaoVigencia='" + situacaoVigencia + '\'' +
                 '}';
     }
@@ -242,14 +240,6 @@ public class Contrato {
 
     public void setValorContrato(Double valorContrato) {
         this.valorContrato = valorContrato;
-    }
-
-    public float getConsumido() {
-        return consumido;
-    }
-
-    public void setConsumido(float consumido) {
-        this.consumido = consumido;
     }
 
     public String getSituacaoVigencia() {

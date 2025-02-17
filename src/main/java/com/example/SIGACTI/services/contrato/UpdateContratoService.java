@@ -48,7 +48,6 @@ public class UpdateContratoService {
             contrato.setDataContrato(contratoDto.dataContrato());
             contrato.setVigenciaInicial(contratoDto.vigenciaInicial());
             contrato.setValorContrato(contratoDto.valorContrato());
-            contrato.setConsumido(contratoDto.consumido());
             contrato.setSituacaoVigencia(contratoDto.situacaoVigencia());
 
             if (contratoDto.idProcesso() != null) {
