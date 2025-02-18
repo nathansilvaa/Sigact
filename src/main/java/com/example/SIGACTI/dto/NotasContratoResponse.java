@@ -18,7 +18,7 @@ public record NotasContratoResponse(
         String gestorContrato
 ) {
     public static NotasContratoResponse converterNotasContrato(NotasContrato notasContrato) {
-        NotasContratoResponse notasContratoResponse = new NotasContratoResponse(
+        return new NotasContratoResponse(
                 notasContrato.getId(),
                 notasContrato.getNotaFiscal(),
                 ContratoResponse.conveterContrato( notasContrato.getContrato()),
@@ -30,7 +30,6 @@ public record NotasContratoResponse(
                 notasContrato.getAtesto(),
                 notasContrato.getFiscalContrato(),
                 notasContrato.getGestorContrato()
-                );
-        return notasContratoResponse;
+        );
     }
 }

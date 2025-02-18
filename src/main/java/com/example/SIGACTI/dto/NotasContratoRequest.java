@@ -1,12 +1,8 @@
 package com.example.SIGACTI.dto;
 
-import com.example.SIGACTI.model.entities.Contrato;
 import com.example.SIGACTI.model.entities.NotasContrato;
-import com.example.SIGACTI.model.entities.Processo;
 import com.example.SIGACTI.model.repositories.ContratoRepository;
 import com.example.SIGACTI.model.repositories.ProcessoRepository;
-
-import java.util.Optional;
 
 public record NotasContratoRequest(
         String notaFiscal,
@@ -21,8 +17,6 @@ public record NotasContratoRequest(
         String gestorContrato
 ) {
     public NotasContrato converterNotasContrato(ProcessoRepository processoRepository, ContratoRepository contratoRepository){
-
-
         NotasContrato notasContrato = new NotasContrato();
         notasContrato.setNotaFiscal(notaFiscal());
         notasContrato.setObjeto(objeto);
