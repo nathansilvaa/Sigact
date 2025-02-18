@@ -19,17 +19,17 @@ public record NotasContratoResponse(
 ) {
     public static NotasContratoResponse converterNotasContrato(NotasContrato notasContrato) {
         return new NotasContratoResponse(
-                notasContrato.getId(),
-                notasContrato.getNotaFiscal(),
-                ContratoResponse.conveterContrato( notasContrato.getContrato()),
-                ProcessoResponse.conveterProcesso(notasContrato.getProcesso()),
-                notasContrato.getObjeto(),
-                notasContrato.getContratado(),
-                notasContrato.getCnpj(),
-                notasContrato.getValorContrato(),
-                notasContrato.getAtesto(),
-                notasContrato.getFiscalContrato(),
-                notasContrato.getGestorContrato()
-        );
+            notasContrato.getId(),
+            notasContrato.getNotaFiscal(),
+            ContratoResponse.conveterContrato( notasContrato.getContrato()),
+            ProcessoResponse.conveterProcesso(notasContrato.getProcesso()),
+            notasContrato.getObjeto(),
+            notasContrato.getContratado(),
+            notasContrato.getCnpj(),
+            notasContrato.getValorContrato(),
+            notasContrato.getAtesto(),
+            notasContrato.getFiscalContrato(),
+            notasContrato.getGestorContrato()
+            );
     }
 }

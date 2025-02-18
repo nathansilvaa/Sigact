@@ -24,8 +24,7 @@ public class ItemContrato {
     private double valorUnitario;
     private double valorTotal;
 
-    public ItemContrato() {
-    }
+    public ItemContrato() {}
 
     public ItemContrato(Long id, Processo processo, Contrato contrato, String item, int siga, String descricao, String modelo, int quantidade, TipoContrato tipoContrato, float valorUnitario, float valorTotal) {
         this.id = id;
