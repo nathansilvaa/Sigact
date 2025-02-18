@@ -1,7 +1,5 @@
-package com.example.SIGACTI.controllers;
+package com.example.SIGACTI.controllers.ocorrencia;
 
-import com.example.SIGACTI.dto.NotasContratoRequest;
-import com.example.SIGACTI.dto.NotasContratoResponse;
 import com.example.SIGACTI.dto.OcorreciasRequest;
 import com.example.SIGACTI.dto.OcorrenciaResponse;
 import com.example.SIGACTI.services.ocorrencias.CreateOcorrenciasService;
