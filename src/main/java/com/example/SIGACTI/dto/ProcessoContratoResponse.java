@@ -3,6 +3,7 @@ package com.example.SIGACTI.dto;
 import com.example.SIGACTI.model.entities.AcaoOrcamentaria;
 import com.example.SIGACTI.model.entities.Contrato;
 import com.example.SIGACTI.model.entities.NotasContrato;
+import com.example.SIGACTI.model.entities.Ocorrencias;
 
 import java.util.Date;
 import java.util.List;
@@ -27,7 +28,8 @@ public record ProcessoContratoResponse(
     Double saldo,
     long PercentualConsumido,
     String situacaoVigencia,
-    List<NotasContrato> notasContrato
+    List<NotasContrato> notasContrato,
+    List<Ocorrencias> ocorrencias
 
 ){
     public static ProcessoContratoResponse conveterContrato(Contrato contrato){
@@ -50,8 +52,8 @@ public record ProcessoContratoResponse(
                 contrato.getSaldoRestanteContrato(),
                 contrato.getPercentualConsumido(),
                 contrato.getSituacaoVigencia(),
-                contrato.getNotasContrato()
-
+                contrato.getNotasContrato(),
+                contrato.getOcorrencias()
         );
         return contratoResponse;
     }

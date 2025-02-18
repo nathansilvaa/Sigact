@@ -26,6 +26,10 @@ public class Processo {
     private String interessados;
     private String assunto;
     private String resumoObjeto;
+
+    @OneToMany(mappedBy = "processo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Ocorrencias> ocorrencias = new ArrayList<>();
+
     // Relacionamento OneToMany com Contrato
     @OneToMany(mappedBy = "processo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnoreProperties("processo")
@@ -35,11 +39,11 @@ public class Processo {
     @JsonIgnoreProperties("processo")
     private List<CompraDireta> comprasDireta = new ArrayList<>();
 
-    public Processo(){
 
+    public Processo(){
     }
 
-    public Processo(Long id, String idProcesso, String unidadeGestora, String situacao, Double valorPrevisto, Date dataAtuacao, String interessados, String assunto, String resumoObjeto, List<Contrato> contratos, List<CompraDireta> comprasDireta) {
+    public Processo(Long id, String idProcesso, String unidadeGestora, String situacao, Double valorPrevisto, Date dataAtuacao, String interessados, String assunto, String resumoObjeto, List<Ocorrencias> ocorrencias, List<Contrato> contratos, List<CompraDireta> comprasDireta) {
         this.id = id;
         this.idProcesso = idProcesso;
         this.unidadeGestora = unidadeGestora;
@@ -49,6 +53,7 @@ public class Processo {
         this.interessados = interessados;
         this.assunto = assunto;
         this.resumoObjeto = resumoObjeto;
+        this.ocorrencias = ocorrencias;
         this.contratos = contratos;
         this.comprasDireta = comprasDireta;
     }
@@ -141,6 +146,14 @@ public class Processo {
         this.comprasDireta = comprasDireta;
     }
 
+    public List<Ocorrencias> getOcorrencias() {
+        return ocorrencias;
+    }
+
+    public void setOcorrencias(List<Ocorrencias> ocorrencias) {
+        this.ocorrencias = ocorrencias;
+    }
+
     @Override
     public String toString() {
         return "Processo{" +
@@ -153,6 +166,7 @@ public class Processo {
                 ", interessados='" + interessados + '\'' +
                 ", assunto='" + assunto + '\'' +
                 ", resumoObjeto='" + resumoObjeto + '\'' +
+                ", ocorrencias=" + ocorrencias +
                 ", contratos=" + contratos +
                 ", comprasDireta=" + comprasDireta +
                 '}';
