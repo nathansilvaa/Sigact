@@ -14,11 +14,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CreateItemContratoService {
-    @Autowired
     private final ItemContratoRepository itemContratoRepository;
-    @Autowired
     private final ProcessoRepository processoRepository;
-    @Autowired
     private final ContratoRepository contratoRepository;
 
     public CreateItemContratoService(ContratoRepository contratoRepository, ProcessoRepository processoRepository, ItemContratoRepository itemContratoRepository) {
@@ -27,7 +24,7 @@ public class CreateItemContratoService {
         this.itemContratoRepository = itemContratoRepository;
     }
 
-    @Transactional
+
     public ItemContratoResponse salvar(ItemContratoRequest itemContratoDto) {
         Processo processo = processoRepository.findById(itemContratoDto.idProcesso()).orElseThrow(() -> new RuntimeException("Processo relacionado não encontrado"));
         Contrato contrato = contratoRepository.findById(itemContratoDto.idContrato()).orElseThrow(() -> new RuntimeException("Contrato relacionado não encontrado"));

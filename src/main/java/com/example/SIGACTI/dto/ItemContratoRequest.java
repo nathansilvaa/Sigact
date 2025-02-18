@@ -20,7 +20,6 @@ public record ItemContratoRequest(
     public static ItemContrato converterItemContrato(ItemContratoRequest itemContratoRequest, Processo processo, Contrato contrato) {
         ItemContrato itemContrato =  new ItemContrato();
 
-        itemContrato.setId(itemContratoRequest.idProcesso());
         itemContrato.setProcesso(processo);
         itemContrato.setContrato(contrato);
         itemContrato.setItem(itemContratoRequest.item());

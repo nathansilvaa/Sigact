@@ -45,7 +45,7 @@ public class Contrato {
     private Date vigenciaInicial;
     private Double valorContrato;
     private float consumido = 0;
-    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "contrato", cascade = CascadeType.ALL)
     List<ItemContrato> itemContrato = new ArrayList<>();
 
     private String situacaoVigencia;
