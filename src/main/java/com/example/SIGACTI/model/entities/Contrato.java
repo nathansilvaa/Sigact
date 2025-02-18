@@ -45,6 +45,8 @@ public class Contrato {
     private Date vigenciaInicial;
     private Double valorContrato;
     private float consumido = 0;
+    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
+    List<ItemContrato> itemContrato = new ArrayList<>();
 
     private String situacaoVigencia;
 
@@ -62,7 +64,7 @@ public class Contrato {
         return percentArredondado;
     };
 
-    public Contrato(Long id, String idContrato, List<NotasContrato> notasContrato, Processo processo, Date orcamento, AcaoOrcamentaria acaoOrcamentaria, int fonteRecurso, String tipoContratacao, Contratado contratado, int numeroAltomatico, String objeto, String statusContrato, String funLegal, String naturezaServico, Date dataContrato, Date vigenciaInicial, Double valorContrato, float consumido, String situacaoVigencia) {
+    public Contrato(Long id, String idContrato, List<NotasContrato> notasContrato, Processo processo, Date orcamento, AcaoOrcamentaria acaoOrcamentaria, int fonteRecurso, String tipoContratacao, Contratado contratado, int numeroAltomatico, String objeto, String statusContrato, String funLegal, String naturezaServico, Date dataContrato, Date vigenciaInicial, Double valorContrato, float consumido, List<ItemContrato> itemContrato, String situacaoVigencia) {
         this.id = id;
         this.idContrato = idContrato;
         this.notasContrato = notasContrato;
@@ -81,6 +83,7 @@ public class Contrato {
         this.vigenciaInicial = vigenciaInicial;
         this.valorContrato = valorContrato;
         this.consumido = consumido;
+        this.itemContrato = itemContrato;
         this.situacaoVigencia = situacaoVigencia;
     }
 
@@ -95,7 +98,7 @@ public class Contrato {
                 ", acaoOrcamentaria=" + acaoOrcamentaria +
                 ", fonteRecurso=" + fonteRecurso +
                 ", tipoContratacao='" + tipoContratacao + '\'' +
-                ", contratado='" + contratado + '\'' +
+                ", contratado=" + contratado +
                 ", numeroAltomatico=" + numeroAltomatico +
                 ", objeto='" + objeto + '\'' +
                 ", statusContrato='" + statusContrato + '\'' +
@@ -105,6 +108,7 @@ public class Contrato {
                 ", vigenciaInicial=" + vigenciaInicial +
                 ", valorContrato=" + valorContrato +
                 ", consumido=" + consumido +
+                ", itemContrato=" + itemContrato +
                 ", situacaoVigencia='" + situacaoVigencia + '\'' +
                 '}';
     }
@@ -179,6 +183,14 @@ public class Contrato {
 
     public void setContratado(Contratado contratado) {
         this.contratado = contratado;
+    }
+
+    public List<ItemContrato> getItemContrato() {
+        return itemContrato;
+    }
+
+    public void setItemContrato(List<ItemContrato> itemContrato) {
+        this.itemContrato = itemContrato;
     }
 
     public int getNumeroAltomatico() {

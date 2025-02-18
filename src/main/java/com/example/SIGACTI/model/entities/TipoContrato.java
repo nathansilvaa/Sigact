@@ -1,4 +1,4 @@
-package com.example.SIGACTI.model.entities.ItemContrato;
+package com.example.SIGACTI.model.entities;
 
 public enum TipoContrato {
     PROCESSO,

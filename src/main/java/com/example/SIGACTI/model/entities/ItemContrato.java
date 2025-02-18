@@ -1,7 +1,5 @@
-package com.example.SIGACTI.model.entities.ItemContrato;
+package com.example.SIGACTI.model.entities;
 
-import com.example.SIGACTI.model.entities.Contrato;
-import com.example.SIGACTI.model.entities.Processo;
 import jakarta.persistence.*;
 
 @Entity
@@ -129,5 +127,22 @@ public class ItemContrato {
 
     public void setValorTotal(double valorTotal) {
         this.valorTotal = valorTotal;
+    }
+
+    @Override
+    public String toString() {
+        return "ItemContrato{" +
+                "id=" + id +
+                ", processo=" + processo +
+                ", contrato=" + contrato +
+                ", item='" + item + '\'' +
+                ", siga=" + siga +
+                ", descricao='" + descricao + '\'' +
+                ", modelo='" + modelo + '\'' +
+                ", quantidade=" + quantidade +
+                ", tipoContrato=" + tipoContrato +
+                ", valorUnitario=" + valorUnitario +
+                ", valorTotal=" + valorTotal +
+                '}';
     }
 }

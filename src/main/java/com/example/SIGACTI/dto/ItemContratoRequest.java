@@ -1,8 +1,8 @@
 package com.example.SIGACTI.dto;
 
 import com.example.SIGACTI.model.entities.Contrato;
-import com.example.SIGACTI.model.entities.ItemContrato.ItemContrato;
-import com.example.SIGACTI.model.entities.ItemContrato.TipoContrato;
+import com.example.SIGACTI.model.entities.ItemContrato;
+import com.example.SIGACTI.model.entities.TipoContrato;
 import com.example.SIGACTI.model.entities.Processo;
 
 public record ItemContratoRequest(
