@@ -4,6 +4,7 @@ import com.example.SIGACTI.model.entities.AcaoOrcamentaria;
 import com.example.SIGACTI.model.entities.Contratado;
 import com.example.SIGACTI.model.entities.Contrato;
 import com.example.SIGACTI.model.entities.NotasContrato;
+import com.example.SIGACTI.model.entities.Ocorrencias;
 
 import java.util.Date;
 import java.util.List;
@@ -27,9 +28,9 @@ public record ProcessoContratoResponse(
     Double valorContrato,
     Double saldo,
     long PercentualConsumido,
-    float consumido,
     String situacaoVigencia,
-    List<NotasContrato> notasContrato
+    List<NotasContrato> notasContrato,
+    List<Ocorrencias> ocorrencias
 
 ){
     public static ProcessoContratoResponse conveterContrato(Contrato contrato){
@@ -51,10 +52,9 @@ public record ProcessoContratoResponse(
                 contrato.getValorContrato(),
                 contrato.getSaldoRestanteContrato(),
                 contrato.getPercentualConsumido(),
-                contrato.getConsumido(),
                 contrato.getSituacaoVigencia(),
-                contrato.getNotasContrato()
-
+                contrato.getNotasContrato(),
+                contrato.getOcorrencias()
         );
         return contratoResponse;
     }

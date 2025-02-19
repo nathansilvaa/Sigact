@@ -18,7 +18,6 @@ public class UpdateNotasContratoController {
     public UpdateNotasContratoController(UpdateNotasContratoService service) {
         this.service = service;
     }
-
     @PutMapping
     public ResponseEntity<NotasContratoResponse> atualizarNotasContrato(
             @RequestParam Long notaFiscal,
