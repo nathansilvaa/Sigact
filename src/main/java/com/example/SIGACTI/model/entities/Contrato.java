@@ -2,9 +2,7 @@ package com.example.SIGACTI.model.entities;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -65,7 +63,7 @@ public class Contrato {
         return percentArredondado;
     };
 
-    public Contrato(Long id, String idContrato, List<NotasContrato> notasContrato, Processo processo, Date orcamento, AcaoOrcamentaria acaoOrcamentaria, int fonteRecurso, String tipoContratacao, String contratado, int numeroAltomatico, String objeto, String statusContrato, String funLegal, String naturezaServico, Date dataContrato, Date vigenciaInicial, Double valorContrato, List<Ocorrencias> ocorrencias, String situacaoVigencia) {
+    public Contrato(Long id, String idContrato, List<NotasContrato> notasContrato, Processo processo, Date orcamento, AcaoOrcamentaria acaoOrcamentaria, int fonteRecurso, String tipoContratacao, Contratado contratado, int numeroAltomatico, String objeto, String statusContrato, String funLegal, String naturezaServico, Date dataContrato, Date vigenciaInicial, Double valorContrato, List<Ocorrencias> ocorrencias, String situacaoVigencia) {
         this.id = id;
         this.idContrato = idContrato;
         this.notasContrato = notasContrato;
