@@ -1,10 +1,6 @@
 package com.example.SIGACTI.dto;
 
-import com.example.SIGACTI.model.entities.AcaoOrcamentaria;
-import com.example.SIGACTI.model.entities.Contratado;
-import com.example.SIGACTI.model.entities.Contrato;
-import com.example.SIGACTI.model.entities.NotasContrato;
-import com.example.SIGACTI.model.entities.Ocorrencias;
+import com.example.SIGACTI.model.entities.*;
 
 import java.util.Date;
 import java.util.List;
@@ -28,8 +24,10 @@ public record ProcessoContratoResponse(
     Double valorContrato,
     Double saldo,
     long PercentualConsumido,
+    float consumido,
     String situacaoVigencia,
     List<NotasContrato> notasContrato,
+    List<ItemContrato> itensContrato,
     List<Ocorrencias> ocorrencias
 
 ){
@@ -52,8 +50,10 @@ public record ProcessoContratoResponse(
                 contrato.getValorContrato(),
                 contrato.getSaldoRestanteContrato(),
                 contrato.getPercentualConsumido(),
+                contrato.getConsumido(),
                 contrato.getSituacaoVigencia(),
                 contrato.getNotasContrato(),
+                contrato.getItemContrato(),
                 contrato.getOcorrencias()
         );
         return contratoResponse;
